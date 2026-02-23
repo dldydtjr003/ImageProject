@@ -12,88 +12,144 @@
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 
 <style>
+body {
+	background-color: #f5f7fa;
+	font-family: 'Pretendard', sans-serif;
+	margin: 0;
+	color: #333;
+}
+
+.register-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 90vh;
+	padding: 40px 20px;
+}
+
+.register-card {
+	background: #ffffff;
+	width: 100%;
+	max-width: 480px;
+	padding: 40px;
+	border-radius: 32px;
+	/* read.jsp와 동일한 입체감 있는 카드 그림자 */
+	box-shadow: 20px 20px 60px #d9dbe0, -20px -20px 60px #ffffff;
+}
+
 h2 {
-	font-size: 24px;
-	font-weight: 700;
+	font-size: 26px;
+	font-weight: 800;
 	color: #1a1a1a;
-	margin-bottom: 35px;
+	margin-bottom: 40px;
 	text-align: center;
-	letter-spacing: -0.5px;
+	letter-spacing: -1px;
 }
 
 table {
 	width: 100%;
-	max-width: 400px; 
-	margin: 0 auto;
 	border-collapse: collapse;
 }
 
 tr {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 24px;
-	align-items: center; 
-}
-
-td {
-	width: 100%;
-	display: block;
-	text-align: center; 
+	margin-bottom: 28px;
+	align-items: center;
 }
 
 td:first-child {
 	font-size: 14px;
-	font-weight: 600;
-	color: #5e6e82;
-	margin-bottom: 8px;
-	padding-left: 0; 
+	font-weight: 700;
+	color: #8a94a6;
+	margin-bottom: 10px;
+	text-align: center;
 }
 
+/* 공통 인풋 스타일 */
 input {
 	width: 100%;
-	max-width: 360px; 
-	padding: 14px;
-	border: 1px solid #e1e4e8;
-	border-radius: 12px;
+	max-width: 380px;
+	padding: 18px 20px;
+	border: none;
+	border-radius: 16px;
 	font-size: 15px;
+	font-weight: 600;
 	box-sizing: border-box;
-	text-align: center; 
+	text-align: center;
+	transition: all 0.3s ease;
+	outline: none;
+}
+
+/* [read.jsp와 동일] 읽기 전용 인풋 (음각) */
+input[readonly] {
+	color: #4b5563;
+	background-color: #f8f9fb;
+	box-shadow: inset 5px 5px 10px #e2e4e9, inset -5px -5px 10px #ffffff;
+	cursor: default;
+}
+
+/* [차별점] 수정 가능한 인풋 (양각 느낌 + 포커스 효과) */
+#groupNameInput {
+	background-color: #ffffff;
+	color: #1a1a1a;
+	/* 기본 상태는 살짝 떠 보이는 느낌 */
+	box-shadow: 4px 4px 10px #e2e4e9, -4px -4px 10px #ffffff, inset 0px 0px
+		0px transparent;
+	border: 1px solid #edf2f7;
+}
+
+#groupNameInput:focus {
+	border: 1px solid #007aff;
+	box-shadow: 0px 0px 0px 4px rgba(0, 122, 255, 0.1);
+	background-color: #fff;
 }
 
 .btn-container {
 	display: flex;
 	justify-content: center;
 	gap: 12px;
-	margin-top: 30px;
+	margin-top: 45px;
 }
 
 button {
-	width: 140px; 
-	height: 48px;
-	border-radius: 10px;
+	width: 110px;
+	height: 50px;
+	border-radius: 14px;
 	font-size: 15px;
 	font-weight: 600;
 	cursor: pointer;
-	transition: all 0.2s ease;
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	border: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
+/* 수정 완료 버튼 (블루) */
 #btnModify {
 	background-color: #007aff;
 	color: white;
+	box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
 }
 
+#btnModify:hover {
+	background-color: #0063d1;
+	transform: translateY(-2px);
+}
+
+/* 목록 버튼 (그레이) */
 #btnList {
-	background-color: #f1f3f5;
-	color: #495057;
+	background-color: #f0f2f5;
+	color: #5e6e82;
 }
 
-button:hover {
-	transform: translateY(-1px);
-	filter: brightness(0.95);
+#btnList:hover {
+	background-color: #e4e7eb;
+}
+
+button:active {
+	transform: scale(0.96);
 }
 </style>
 </head>
