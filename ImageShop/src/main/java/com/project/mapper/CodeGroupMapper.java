@@ -1,0 +1,11 @@
+package com.project.mapper;
+
+import java.util.List;
+
+import com.project.domain.CodeGroup;
+
+public interface CodeGroupMapper {
+	
+	public int create(CodeGroup codeGroup) throws Exception; 
+	public List<CodeGroup> list()throws Exception;
+}
