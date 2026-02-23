@@ -8,4 +8,5 @@ public interface CodeGroupMapper {
 	
 	public int create(CodeGroup codeGroup) throws Exception; 
 	public List<CodeGroup> list()throws Exception;
+	public CodeGroup read(CodeGroup codeGroup) throws Exception;
 }

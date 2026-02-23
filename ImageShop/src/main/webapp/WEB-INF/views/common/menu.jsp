@@ -37,12 +37,6 @@
 <nav class="main-menu-nav">
 	<a href="/codegroup/list" class="menu-item active"> <i
 		data-lucide="settings-2" style="width: 18px;"></i> 코드그룹 관리
-	</a> <a href="/code/list" class="menu-item"> <i data-lucide="code"
-		style="width: 18px;"></i> 공통코드 관리
-	</a> <a href="/member/list" class="menu-item"> <i data-lucide="users"
-		style="width: 18px;"></i> 회원 관리
-	</a> <a href="/item/list" class="menu-item"> <i
-		data-lucide="shopping-bag" style="width: 18px;"></i> 상품 관리
 	</a>
 </nav>
 

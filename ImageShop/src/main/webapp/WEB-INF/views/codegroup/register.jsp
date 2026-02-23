@@ -12,7 +12,6 @@
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 
 <style>
-/* 전체 배경 및 폰트 설정 */
 body {
 	background-color: #f5f7fa; /* 아주 연한 그레이 블루 */
 	font-family: 'Pretendard', sans-serif;
@@ -20,7 +19,6 @@ body {
 	color: #333;
 }
 
-/* 메인 컨테이너 */
 .register-wrapper {
 	display: flex;
 	justify-content: center;
@@ -29,7 +27,6 @@ body {
 	padding: 20px;
 }
 
-/* 화이트 카드 디자인 */
 .register-card {
 	background: #ffffff;
 	width: 100%;
@@ -47,7 +44,6 @@ h2 {
 	text-align: center;
 }
 
-/* 테이블을 모던한 폼 형태로 변환 */
 table {
 	width: 100%;
 	border-collapse: collapse;
@@ -59,7 +55,6 @@ tr {
 	margin-bottom: 20px;
 }
 
-/* 라벨 스타일 */
 td:first-child {
 	font-size: 14px;
 	font-weight: 600;
@@ -67,7 +62,6 @@ td:first-child {
 	margin-bottom: 8px;
 }
 
-/* 인풋 박스 스타일 */
 input[type="text"] {
 	width: 100%;
 	padding: 14px 16px;
@@ -86,7 +80,6 @@ input[type="text"]:focus {
 	box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
 }
 
-/* 에러 메시지 */
 font[color="red"] {
 	font-size: 12px;
 	margin-top: 5px;
@@ -94,7 +87,6 @@ font[color="red"] {
 	font-weight: 500;
 }
 
-/* 버튼 그룹 */
 .btn-container {
 	display: flex;
 	gap: 12px;
@@ -112,7 +104,6 @@ button {
 	border: none;
 }
 
-/* 등록 버튼: 메인 블루 */
 #btnRegister {
 	background-color: #007aff;
 	color: white;
@@ -123,7 +114,6 @@ button {
 	transform: translateY(-1px);
 }
 
-/* 목록 버튼: 소프트 그레이 */
 #btnList {
 	background-color: #f0f2f5;
 	color: #4b5563;

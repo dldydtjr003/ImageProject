@@ -52,8 +52,5 @@
 			SHOP</span>
 	</a>
 
-	<div class="user-info">
-		<span>관리자님 안녕하세요</span> <a href="/logout" class="logout-link">로그아웃</a>
-	</div>
 </header>
 <hr>

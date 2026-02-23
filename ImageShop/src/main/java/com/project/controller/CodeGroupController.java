@@ -45,8 +45,14 @@ public class CodeGroupController {
 	// 코드그룹 목록 페이지 요청
 	@GetMapping("/list")
 	public void list(Model model) throws Exception {
-		log.info("model.getAttribute = "+model.getAttribute("msg"));
+		log.info("model.getAttribute = " + model.getAttribute("msg"));
 		model.addAttribute("list", service.list());
+	}
+
+	// 코드그룹 상세 페이지 요청
+	@GetMapping("/read")
+	public void read(CodeGroup codeGroup, Model model) throws Exception {
+		model.addAttribute(service.read(codeGroup));
 	}
 
 }
