@@ -14,6 +14,13 @@
 	</select>
 	<!-- 상세 조회 -->
 	<select id="read" resultType="CodeGroup">
-		SELECT group_code, group_name, use_yn, reg_date FROM code_group WHERE group_code = #{groupCode}
+		SELECT group_code, group_name,
+		use_yn, reg_date FROM code_group WHERE group_code = #{groupCode}
 	</select>
+	<!-- 삭제 처리 -->
+	<delete id="remove">
+		DELETE FROM code_group
+		WHERE group_code =
+		#{groupCode}
+	</delete>
 </mapper>

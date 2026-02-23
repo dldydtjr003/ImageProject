@@ -55,4 +55,18 @@ public class CodeGroupController {
 		model.addAttribute(service.read(codeGroup));
 	}
 
+	// 코드그룹 삭제 처리
+	@PostMapping("/remove")
+	public String remove(CodeGroup codeGroup, RedirectAttributes rttr) throws Exception {
+		int count = service.remove(codeGroup);
+
+		// rttr.addFlashAttribute("msg", "SUCCESS") 세션에 정보를 임시저장
+		if (count != 0) {
+			rttr.addFlashAttribute("msg", "SUCCESS");
+		 } else {
+			rttr.addFlashAttribute("msg", "Fail");
+		}
+		return "redirect:/codegroup/list";
+	}
+
 }

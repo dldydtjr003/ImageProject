@@ -14,4 +14,7 @@ public interface CodeGroupService {
 	
 	// 코드그룹 상세페이지 요청
 	public CodeGroup read (CodeGroup codeGroup) throws Exception;
+	
+	// 코드그룹 삭제 처리 
+	public int remove(CodeGroup codeGroup) throws Exception;
 }

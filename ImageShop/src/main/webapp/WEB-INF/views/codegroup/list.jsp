@@ -203,6 +203,8 @@ tbody tr:hover {
 			if (result === "SUCCESS") {
 				// 단순 얼럿보다 조금 더 세련되게 (원하신다면 스위트얼럿 등으로 대체 가능)
 				alert("<spring:message code='common.processSuccess' />");
+			}else if(result === "Fail"){
+				altert("삭제 처리 실패")				
 			}
 		});
 	</script>
