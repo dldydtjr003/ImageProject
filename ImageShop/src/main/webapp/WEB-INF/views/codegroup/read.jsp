@@ -30,26 +30,26 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 80vh;
+	min-height: 90vh;
 	padding: 40px 20px;
 }
 
 .register-card {
 	background: #ffffff;
 	width: 100%;
-	max-width: 500px;
+	max-width: 480px;
 	padding: 40px;
-	border-radius: 24px;
-	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+	border-radius: 32px;
+	box-shadow: 2px 2px 6px #d9dbe0, -2px -2px 6px #ffffff;
 }
 
 h2 {
-	font-size: 24px;
-	font-weight: 700;
+	font-size: 26px;
+	font-weight: 800;
 	color: #1a1a1a;
-	margin-bottom: 35px;
+	margin-bottom: 40px;
 	text-align: center;
-	letter-spacing: -0.5px;
+	letter-spacing: -1px;
 }
 
 table {
@@ -60,72 +60,69 @@ table {
 tr {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 24px;
+	margin-bottom: 28px;
+	align-items: center;
 }
 
 td:first-child {
 	font-size: 14px;
-	font-weight: 600;
-	color: #5e6e82;
-	margin-bottom: 8px;
-	padding-left: 4px;
+	font-weight: 700;
+	color: #8a94a6;
+	margin-bottom: 10px;
+	text-align: center;
 }
 
-/* 읽기 전용 인풋 스타일 */
 input[readonly] {
 	width: 100%;
-	padding: 16px;
-	border: 1px solid #e1e4e8;
-	border-radius: 12px;
+	max-width: 380px;
+	padding: 18px 20px;
+	border: none;
+	border-radius: 16px;
 	font-size: 15px;
-	background-color: #fcfcfd; /* 살짝 다른 배경색으로 읽기전용 표시 */
+	font-weight: 600;
 	color: #4b5563;
+	background-color: #f8f9fb;
+	box-shadow: inset 2px 2px 5px #e2e4e9, inset -2px -2px 5px #ffffff;
 	box-sizing: border-box;
 	cursor: default;
+	text-align: center;
+	transition: all 0.3s ease;
 }
 
-input[readonly]:focus {
-	outline: none;
-	border-color: #cbd5e0;
-}
-
-/* 버튼 그룹 레이아웃 */
 .btn-container {
 	display: flex;
-	gap: 10px;
-	margin-top: 40px;
+	justify-content: center;
+	gap: 12px;
+	margin-top: 45px;
 }
 
 button {
-	flex: 1;
-	height: 52px;
-	border-radius: 12px;
+	width: 110px; 
+	height: 50px;
+	border-radius: 14px;
 	font-size: 15px;
 	font-weight: 600;
 	cursor: pointer;
-	transition: all 0.2s;
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	border: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 6px;
 }
 
-/* 수정 버튼 (메인 블루) */
 #btnEdit {
 	background-color: #007aff;
 	color: white;
-	flex: 1.5; /* 수정 버튼을 더 크게 */
+	box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
 }
 
 #btnEdit:hover {
 	background-color: #0063d1;
-	box-shadow: 0 4px 12px rgba(0, 122, 255, 0.25);
+	transform: translateY(-2px);
 }
 
-/* 삭제 버튼 (소프트 레드) */
 #btnRemove {
-	background-color: #fff0f0;
+	background-color: #fff0f1;
 	color: #f04452;
 }
 
@@ -134,10 +131,9 @@ button {
 	color: white;
 }
 
-/* 목록 버튼 (뉴트럴) */
 #btnList {
 	background-color: #f0f2f5;
-	color: #4b5563;
+	color: #5e6e82;
 }
 
 #btnList:hover {
@@ -145,7 +141,7 @@ button {
 }
 
 button:active {
-	transform: scale(0.97);
+	transform: scale(0.96);
 }
 </style>
 

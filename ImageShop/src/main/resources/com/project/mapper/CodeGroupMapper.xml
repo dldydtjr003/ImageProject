@@ -23,4 +23,10 @@
 		WHERE group_code =
 		#{groupCode}
 	</delete>
+	<!-- 수정 처리 -->
+	<update id="modify">
+		UPDATE code_group
+		SET group_name =#{groupName}
+		WHERE group_code = #{groupCode}
+	</update>
 </mapper>
