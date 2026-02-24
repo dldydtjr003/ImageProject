@@ -16,7 +16,6 @@
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 
 <style>
-/* 1. 기본 스타일 리셋 및 배경 */
 body {
 	background-color: #f5f7fa;
 	font-family: 'Pretendard', sans-serif;
@@ -24,14 +23,12 @@ body {
 	color: #333;
 }
 
-/* 2. 컨텐츠 중앙 정렬 컨테이너 */
 .content-container {
 	max-width: 1100px;
 	margin: 50px auto;
 	padding: 0 20px;
 }
 
-/* 3. 리스트 헤더 (제목 + 등록버튼) */
 .list-header {
 	display: flex;
 	justify-content: space-between;
@@ -46,7 +43,6 @@ body {
 	color: #1a1a1a;
 }
 
-/* 4. 등록 버튼 (상단 메뉴 블루와 통일) */
 .btn-register {
 	background-color: #007aff;
 	color: white !important;
@@ -69,7 +65,6 @@ body {
 	box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
 }
 
-/* 5. 테이블 카드 레이아웃 */
 .table-card {
 	background: #ffffff;
 	border-radius: 20px;
@@ -84,7 +79,6 @@ table {
 	text-align: left;
 }
 
-/* 테이블 헤더 */
 thead th {
 	background-color: #f9fbff;
 	padding: 20px 24px;
@@ -96,7 +90,6 @@ thead th {
 	letter-spacing: 0.5px;
 }
 
-/* 테이블 본문 */
 tbody td {
 	padding: 18px 24px;
 	font-size: 15px;
@@ -110,7 +103,6 @@ tbody tr:hover {
 	cursor: pointer;
 }
 
-/* 6. 데이터 포인트 스타일 */
 .code-badge {
 	background-color: #f0f2f5;
 	padding: 5px 12px;

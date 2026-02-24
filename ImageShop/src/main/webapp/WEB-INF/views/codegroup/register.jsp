@@ -6,14 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Image Shop</title>
+<title>Image Shop | Code Group Register</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 
 <style>
 body {
-	background-color: #f5f7fa; /* 아주 연한 그레이 블루 */
+	background-color: #f5f7fa;
 	font-family: 'Pretendard', sans-serif;
 	margin: 0;
 	color: #333;
@@ -24,78 +24,86 @@ body {
 	justify-content: center;
 	align-items: center;
 	min-height: 80vh;
-	padding: 20px;
+	padding: 40px 20px;
 }
 
 .register-card {
 	background: #ffffff;
 	width: 100%;
-	max-width: 450px;
-	padding: 40px;
-	border-radius: 20px;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+	max-width: 600px; 
+	padding: 45px;
+	border-radius: 24px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
 }
 
 h2 {
-	font-size: 24px;
+	font-size: 26px;
 	font-weight: 700;
 	color: #1a1a1a;
-	margin-bottom: 30px;
+	margin-bottom: 35px;
 	text-align: center;
 }
 
 table {
 	width: 100%;
-	border-collapse: collapse;
+	border-collapse: separate;
+	border-spacing: 0 15px; 
 }
 
 tr {
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 20px;
+	display: table-row;
 }
 
 td:first-child {
+	width: 130px;
 	font-size: 14px;
 	font-weight: 600;
-	color: #555;
-	margin-bottom: 8px;
+	color: #64748b;
+	vertical-align: middle;
+	padding-right: 15px;
+	white-space: nowrap;
 }
 
 input[type="text"] {
 	width: 100%;
-	padding: 14px 16px;
-	border: 1px solid #e1e4e8;
-	border-radius: 10px;
+	padding: 13px 16px;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
 	font-size: 15px;
-	background-color: #f9fbff;
-	transition: all 0.2s;
+	background-color: #f8fafc;
+	color: #334155;
 	box-sizing: border-box;
+	transition: all 0.2s ease-in-out;
 }
 
 input[type="text"]:focus {
 	outline: none;
 	border-color: #007aff;
 	background-color: #fff;
+	box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
 }
 
-font[color="red"] {
-	font-size: 12px;
-	margin-top: 5px;
+.error-msg-cell {
+	padding-top: 4px;
 	display: block;
+}
+
+.error-msg {
+	font-size: 12px;
+	color: #e11d48;
 	font-weight: 500;
 }
 
 .btn-container {
 	display: flex;
 	gap: 12px;
-	margin-top: 10px;
+	margin-top: 35px;
 }
 
 button {
 	flex: 1;
-	height: 50px;
-	border-radius: 10px;
+	height: 52px;
+	border-radius: 14px;
 	font-size: 15px;
 	font-weight: 600;
 	cursor: pointer;
@@ -114,12 +122,12 @@ button {
 }
 
 #btnList {
-	background-color: #f0f2f5;
-	color: #4b5563;
+	background-color: #f1f5f9;
+	color: #475569;
 }
 
 #btnList:hover {
-	background-color: #e4e7eb;
+	background-color: #e2e8f0;
 }
 
 button:active {
@@ -137,17 +145,22 @@ button:active {
 				<spring:message code="codegroup.header.register" />
 			</h2>
 
-			<form:form modelAttribute="codeGroup" action="register" method="post">
+			<form:form modelAttribute="codeGroup" action="register" method="post"
+				id="codeGroupForm">
 				<table>
 					<tr>
 						<td><spring:message code="codegroup.groupCode" /></td>
-						<td><form:input path="groupCode" placeholder="코드를 입력하세요" /></td>
-						<td><font color="red"><form:errors path="groupCode" /></font></td>
+						<td><form:input path="groupCode" placeholder="코드를 입력하세요" />
+							<div class="error-msg-cell">
+								<form:errors path="groupCode" cssClass="error-msg" />
+							</div></td>
 					</tr>
 					<tr>
 						<td><spring:message code="codegroup.groupName" /></td>
-						<td><form:input path="groupName" placeholder="그룹명을 입력하세요" /></td>
-						<td><font color="red"><form:errors path="groupName" /></font></td>
+						<td><form:input path="groupName" placeholder="그룹명을 입력하세요" />
+							<div class="error-msg-cell">
+								<form:errors path="groupName" cssClass="error-msg" />
+							</div></td>
 					</tr>
 				</table>
 			</form:form>
@@ -167,10 +180,13 @@ button:active {
 
 	<script>
 		$(document).ready(function() {
-			var formObj = $("#codeGroup");
+			// 폼 ID를 지정하여 안전하게 선택
+			var formObj = $("#codeGroupForm");
+
 			$("#btnRegister").on("click", function() {
 				formObj.submit();
 			});
+
 			$("#btnList").on("click", function() {
 				self.location = "list";
 			});
