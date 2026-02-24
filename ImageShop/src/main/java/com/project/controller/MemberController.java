@@ -75,6 +75,7 @@ public class MemberController {
 	// 등록 성공 페이지
 	@GetMapping("/registerSuccess")
 	public void registerSuccess(Model model) throws Exception {
+		model.addAttribute("userName");
 	}
 	// 등록 실패 페이지
 	@GetMapping("/registerFailed")
