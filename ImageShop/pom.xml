@@ -115,6 +115,13 @@
 			<artifactId>spring-boot-starter-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- AOP를 위한 라이브러리 의존 관계 정의 --> 
+		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+			<version>4.0.0-M1</version>
+		</dependency>
 		<!-- security 태그 의존성 설정 -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
