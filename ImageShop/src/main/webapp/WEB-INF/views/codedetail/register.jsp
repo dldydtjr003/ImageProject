@@ -33,7 +33,6 @@ body {
 	max-width: 450px;
 	padding: 40px;
 	border-radius: 20px;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 h2 {
@@ -137,17 +136,24 @@ button:active {
 				<spring:message code="codegroup.header.register" />
 			</h2>
 
-			<form:form modelAttribute="codeGroup" action="register" method="post">
+			<form:form modelAttribute="codedetail" action="/codedetail/register"
+				method="post">
 				<table>
 					<tr>
-						<td><spring:message code="codegroup.groupCode" /></td>
-						<td><form:input path="groupCode" placeholder="코드를 입력하세요" /></td>
+						<td><spring:message code="codedetail.groupCode" /></td>
+						<td><form:select path="groupCode" items="${groupCodeList}"
+								itemValue="value" itemLabel="label" /></td>
 						<td><font color="red"><form:errors path="groupCode" /></font></td>
 					</tr>
 					<tr>
-						<td><spring:message code="codegroup.groupName" /></td>
-						<td><form:input path="groupName" placeholder="그룹명을 입력하세요" /></td>
-						<td><font color="red"><form:errors path="groupName" /></font></td>
+						<td><spring:message code="codedetail.codeValue" /></td>
+						<td><form:input path="codeValue" /></td>
+						<td><font color="red"><form:errors path="codeValue" /></font></td>
+					</tr>
+					<tr>
+						<td><spring:message code="codedetail.codeName" /></td>
+						<td><form:input path="codeName" /></td>
+						<td><font color="red"><form:errors path="codeName" /></font></td>
 					</tr>
 				</table>
 			</form:form>
@@ -167,12 +173,12 @@ button:active {
 
 	<script>
 		$(document).ready(function() {
-			var formObj = $("#codeGroup");
+			var formObj = $("#codedetail");
 			$("#btnRegister").on("click", function() {
 				formObj.submit();
 			});
 			$("#btnList").on("click", function() {
-				self.location = "list";
+				self.location = "/codedetail/list";
 			});
 		});
 	</script>

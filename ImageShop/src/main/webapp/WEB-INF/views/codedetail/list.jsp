@@ -11,25 +11,27 @@
 <meta charset="UTF-8">
 <title>Image Shop | List</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
+/* 1. 기본 스타일 리셋 및 배경 */
 body {
 	background-color: #f5f7fa;
-	font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+	font-family: 'Pretendard', sans-serif;
 	margin: 0;
 	color: #333;
-	-webkit-font-smoothing: antialiased;
 }
 
+/* 2. 컨텐츠 중앙 정렬 컨테이너 */
 .content-container {
 	max-width: 1100px;
 	margin: 50px auto;
 	padding: 0 20px;
 }
 
+/* 3. 리스트 헤더 (제목 + 등록버튼) */
 .list-header {
 	display: flex;
 	justify-content: space-between;
@@ -42,8 +44,9 @@ body {
 	font-weight: 700;
 	margin: 0;
 	color: #1a1a1a;
-	letter-spacing: -0.5px;
 }
+
+/* 4. 등록 버튼 (상단 메뉴 블루와 통일) */
 .btn-register {
 	background-color: #007aff;
 	color: white !important;
@@ -66,6 +69,7 @@ body {
 	box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
 }
 
+/* 5. 테이블 카드 레이아웃 */
 .table-card {
 	background: #ffffff;
 	border-radius: 20px;
@@ -80,6 +84,7 @@ table {
 	text-align: left;
 }
 
+/* 테이블 헤더 */
 thead th {
 	background-color: #f9fbff;
 	padding: 20px 24px;
@@ -91,6 +96,7 @@ thead th {
 	letter-spacing: 0.5px;
 }
 
+/* 테이블 본문 */
 tbody td {
 	padding: 18px 24px;
 	font-size: 15px;
@@ -104,13 +110,14 @@ tbody tr:hover {
 	cursor: pointer;
 }
 
+/* 6. 데이터 포인트 스타일 */
 .code-badge {
-	background-color: #f0f4f8;
-	padding: 6px 12px;
+	background-color: #f0f2f5;
+	padding: 5px 12px;
 	border-radius: 8px;
 	font-family: 'Consolas', monospace;
 	font-weight: 600;
-	color: #475569;
+	color: #4b5563;
 	font-size: 13px;
 }
 
@@ -135,7 +142,7 @@ tbody tr:hover {
 	text-align: center;
 	padding: 80px 0 !important;
 	color: #abb5c2;
-	line-height: 1.6;
+	font-weight: 500;
 }
 </style>
 </head>
@@ -146,11 +153,11 @@ tbody tr:hover {
 	<div class="content-container">
 		<div class="list-header">
 			<h2>
-				<spring:message code="codegroup.header.list" />
+				<spring:message code="codedetail.header.list" />
 			</h2>
-			<a href="/codegroup/register" class="btn-register"> <i
-				data-lucide="plus-circle" style="width: 20px; height: 20px;"></i> <spring:message
-					code="codegroup.header.register" />
+			<a href="register" class="btn-register"> <i
+				data-lucide="plus-circle" style="width: 18px; height: 18px;"></i> <spring:message
+					code="action.new" />
 			</a>
 		</div>
 
@@ -158,34 +165,33 @@ tbody tr:hover {
 			<table>
 				<thead>
 					<tr>
-						<th style="width: 25%; text-align: center;"><spring:message
-								code="codegroup.groupCode" /></th>
-						<th style="width: 45%;"><spring:message
-								code="codegroup.groupName" /></th>
-						<th style="width: 30%; text-align: center;"><spring:message
-								code="codegroup.regdate" /></th>
+						<th width="150"><spring:message code="codedetail.groupCode" /></th>
+						<th width="150"><spring:message code="codedetail.codeValue" /></th>
+						<th><spring:message code="codedetail.codeName" /></th>
+						<th width="100" style="text-align: center;"><spring:message
+								code="codedetail.sortSeq" /></th>
+						<th width="180"><spring:message code="codedetail.regdate" /></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:choose>
 						<c:when test="${empty list}">
 							<tr>
-								<td colspan="3" class="empty-row"><i data-lucide="folder-x"
-									style="width: 40px; height: 40px; margin-bottom: 10px; opacity: 0.3;"></i><br>
-									<spring:message code="common.listEmpty" /></td>
+								<td colspan="5" class="empty-row"><spring:message
+										code="common.listEmpty" /></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${list}" var="codeGroup">
+							<c:forEach items="${list}" var="codeDetail">
 								<tr>
-									<td style="text-align: center;"><span class="code-badge">${codeGroup.groupCode}</span>
-									</td>
+									<td><span class="code-badge">${codeDetail.groupCode}</span></td>
+									<td><span class="code-badge">${codeDetail.codeValue}</span></td>
 									<td><a
-										href="/codegroup/read?groupCode=${codeGroup.groupCode}"
-										class="name-link"> ${codeGroup.groupName} </a></td>
-									<td style="text-align: center;"><span class="date-text">
-											<fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-												value="${codeGroup.regDate}" />
+										href="/codedetail/read?groupCode=${codeDetail.groupCode}&codeValue=${codeDetail.codeValue}"
+										class="name-link"> ${codeDetail.codeName} </a></td>
+									<td style="text-align: center;">${codeDetail.sortSeq}</td>
+									<td><span class="date-text"> <fmt:formatDate
+												pattern="yyyy-MM-dd HH:mm" value="${codeDetail.regDate}" />
 									</span></td>
 								</tr>
 							</c:forEach>
@@ -200,16 +206,22 @@ tbody tr:hover {
 
 	<script>
 		$(document).ready(function() {
-			// 아이콘 활성화
+			// Lucide 아이콘 렌더링
 			lucide.createIcons();
 
+			// 처리 결과 알림
 			var result = "${msg}";
 			if (result === "SUCCESS") {
-				// 단순 얼럿보다 조금 더 세련되게 (원하신다면 스위트얼럿 등으로 대체 가능)
 				alert("<spring:message code='common.processSuccess' />");
-			} else if (result === "Fail") {
-				altert("삭제 처리 실패")
+			} else if (result === "FAIL") {
+				alert("처리에 실패하였습니다.");
 			}
+
+			// 행 전체 클릭 시 상세 페이지 이동 (선택 사항)
+			// $('tbody tr').on('click', function() {
+			//    var link = $(this).find('.name-link').attr('href');
+			//    if(link) location.href = link;
+			// });
 		});
 	</script>
 </body>

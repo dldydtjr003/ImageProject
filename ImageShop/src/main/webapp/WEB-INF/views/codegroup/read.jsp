@@ -40,7 +40,6 @@ body {
 	max-width: 480px;
 	padding: 40px;
 	border-radius: 32px;
-	box-shadow: 2px 2px 6px #d9dbe0, -2px -2px 6px #ffffff;
 }
 
 h2 {
@@ -82,7 +81,6 @@ input[readonly] {
 	font-weight: 600;
 	color: #4b5563;
 	background-color: #f8f9fb;
-	box-shadow: inset 2px 2px 5px #e2e4e9, inset -2px -2px 5px #ffffff;
 	box-sizing: border-box;
 	cursor: default;
 	text-align: center;
@@ -113,7 +111,6 @@ button {
 #btnEdit {
 	background-color: #007aff;
 	color: white;
-	box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
 }
 
 #btnEdit:hover {

@@ -13,7 +13,7 @@
 
 <style>
 body {
-	background-color: #f5f7fa; /* 아주 연한 그레이 블루 */
+	background-color: #f5f7fa; 
 	font-family: 'Pretendard', sans-serif;
 	margin: 0;
 	color: #333;
@@ -33,7 +33,6 @@ body {
 	max-width: 450px;
 	padding: 40px;
 	border-radius: 20px;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 h2 {
@@ -134,30 +133,40 @@ button:active {
 	<div class="register-wrapper">
 		<div class="register-card">
 			<h2>
-				<spring:message code="codegroup.header.register" />
+				<spring:message code="codegroup.header.read" />
 			</h2>
 
-			<form:form modelAttribute="codeGroup" action="register" method="post">
+			<form:form modelAttribute="codeDetail">
+			<form:hidden path="groupCode"/>
 				<table>
 					<tr>
-						<td><spring:message code="codegroup.groupCode" /></td>
-						<td><form:input path="groupCode" placeholder="코드를 입력하세요" /></td>
+						<td><spring:message code="codedetail.groupCode" /></td>
+						<td><form:select path="groupCode" items="${groupCodeList}"
+								itemValue="value" itemLabel="label" disabled="true" /></td>
 						<td><font color="red"><form:errors path="groupCode" /></font></td>
 					</tr>
 					<tr>
-						<td><spring:message code="codegroup.groupName" /></td>
-						<td><form:input path="groupName" placeholder="그룹명을 입력하세요" /></td>
-						<td><font color="red"><form:errors path="groupName" /></font></td>
+						<td><spring:message code="codedetail.codeValue" /></td>
+						<td><form:input path="codeValue" readonly="true" /></td>
+						<td><font color="red"><form:errors path="codeValue" /></font></td>
+					</tr>
+					<tr>
+						<td><spring:message code="codedetail.codeName" /></td>
+						<td><form:input path="codeName"/></td>
+						<td><font color="red"><form:errors path="codeName" /></font></td>
 					</tr>
 				</table>
 			</form:form>
 
 			<div class="btn-container">
+				<button type="button" id="btnEdit">
+					<spring:message code="action.edit" />
+				</button>
+				<button type="button" id="btnRemove">
+					<spring:message code="action.remove" />
+				</button>
 				<button type="button" id="btnList">
 					<spring:message code="action.list" />
-				</button>
-				<button type="button" id="btnRegister">
-					<spring:message code="action.register" />
 				</button>
 			</div>
 		</div>
@@ -167,10 +176,28 @@ button:active {
 
 	<script>
 		$(document).ready(function() {
-			var formObj = $("#codeGroup");
-			$("#btnRegister").on("click", function() {
+			// 3. 폼 객체를 정확한 ID로 선택
+			var formObj = $("#codeDetail");
+
+			// 편집 버튼
+			$("#btnEdit").on("click", function() {
+				// input의 id로 값을 정확히 가져옴
+				formObj.attr("action", "/codedetail/modify");
+				formObj.attr("method", "post");
 				formObj.submit();
 			});
+
+			// 삭제 버튼
+			$("#btnRemove").on("click", function() {
+				if (confirm("정말로 삭제하시겠습니까?")) {
+					// 4. 경로를 현재 위치 기준 상대 경로로 적거나 명확히 설정
+					formObj.attr("action", "/codedetail/remove");
+					formObj.attr("method", "get");
+					formObj.submit();
+				}
+			});
+
+			// 목록 버튼
 			$("#btnList").on("click", function() {
 				self.location = "list";
 			});

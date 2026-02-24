@@ -33,8 +33,6 @@ body {
 	max-width: 480px;
 	padding: 40px;
 	border-radius: 32px;
-	/* read.jsp와 동일한 입체감 있는 카드 그림자 */
-	box-shadow: 20px 20px 60px #d9dbe0, -20px -20px 60px #ffffff;
 }
 
 h2 {
@@ -66,7 +64,6 @@ td:first-child {
 	text-align: center;
 }
 
-/* 공통 인풋 스타일 */
 input {
 	width: 100%;
 	max-width: 380px;
@@ -81,27 +78,20 @@ input {
 	outline: none;
 }
 
-/* [read.jsp와 동일] 읽기 전용 인풋 (음각) */
 input[readonly] {
 	color: #4b5563;
 	background-color: #f8f9fb;
-	box-shadow: inset 5px 5px 10px #e2e4e9, inset -5px -5px 10px #ffffff;
 	cursor: default;
 }
 
-/* [차별점] 수정 가능한 인풋 (양각 느낌 + 포커스 효과) */
 #groupNameInput {
 	background-color: #ffffff;
 	color: #1a1a1a;
-	/* 기본 상태는 살짝 떠 보이는 느낌 */
-	box-shadow: 4px 4px 10px #e2e4e9, -4px -4px 10px #ffffff, inset 0px 0px
-		0px transparent;
 	border: 1px solid #edf2f7;
 }
 
 #groupNameInput:focus {
 	border: 1px solid #007aff;
-	box-shadow: 0px 0px 0px 4px rgba(0, 122, 255, 0.1);
 	background-color: #fff;
 }
 
@@ -126,11 +116,9 @@ button {
 	justify-content: center;
 }
 
-/* 수정 완료 버튼 (블루) */
 #btnModify {
 	background-color: #007aff;
 	color: white;
-	box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
 }
 
 #btnModify:hover {
@@ -138,7 +126,6 @@ button {
 	transform: translateY(-2px);
 }
 
-/* 목록 버튼 (그레이) */
 #btnList {
 	background-color: #f0f2f5;
 	color: #5e6e82;

@@ -1,47 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <style>
-.main-menu-nav {
-	background: #ffffff;
-	padding: 15px 40px;
-	display: flex;
-	gap: 10px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-}
+    .nav-menu-wrapper {
+        background-color: #ffffff;
+        border-bottom: 2px solid #f1f3f5;
+        margin-bottom: 30px;
+    }
 
-.menu-item {
-	padding: 10px 20px;
-	border-radius: 12px;
-	text-decoration: none;
-	color: #4b5563;
-	font-size: 15px;
-	font-weight: 600;
-	transition: all 0.2s;
-	display: flex;
-	align-items: center;
-	gap: 6px;
-}
+    .nav-table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 700px; 
+        table-layout: fixed;
+    }
 
-.menu-item:hover {
-	background-color: #f0f7ff;
-	color: #007aff;
-}
+    .nav-item {
+        padding: 0;
+        text-align: center;
+    }
 
-/* 활성화된 메뉴 스타일 (현재 페이지 표시) */
-.menu-item.active {
-	background-color: #007aff;
-	color: #ffffff;
-}
+    .nav-link {
+        display: block;
+        padding: 20px 0;
+        text-decoration: none;
+        color: #495057;
+        font-size: 16px;     
+        font-weight: 500;    
+        letter-spacing: -0.5px; 
+        transition: all 0.25s ease;
+        position: relative;
+    }
+
+    .nav-link:hover {
+        color: #007aff; 
+        background-color: #f8f9fa;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background-color: #007aff;
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+        width: 100%; 
+    }
 </style>
 
-<nav class="main-menu-nav">
-	<a href="/codegroup/list" class="menu-item active"> <i
-		data-lucide="settings-2" style="width: 18px;"></i> 코드그룹 관리
-	</a>
-</nav>
-
-<script src="https://unpkg.com/lucide@latest"></script>
-<script>
-	lucide.createIcons();
-</script>
-<hr>
+<div class="nav-menu-wrapper">
+    <table class="nav-table">
+        <tr>
+            <td class="nav-item">
+                <a href="/" class="nav-link">
+                    <spring:message code="header.home" />
+                </a>
+            </td>
+            <td class="nav-item">
+                <a href="/codegroup/list" class="nav-link">
+                    <spring:message code="menu.codegroup.list" />
+                </a>
+            </td>
+            <td class="nav-item">
+                <a href="/codedetail/list" class="nav-link">
+                    <spring:message code="menu.codedetail.list" />
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
