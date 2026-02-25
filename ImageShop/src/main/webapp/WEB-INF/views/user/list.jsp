@@ -81,7 +81,6 @@ body {
 table {
 	width: 100%;
 	border-collapse: collapse;
-	text-align: left;
 }
 
 thead th {
@@ -108,39 +107,40 @@ tbody tr:hover {
 	cursor: pointer;
 }
 
-.col-group {
-	width: 150px;
-}
-
-.col-value {
-	width: 150px;
-}
-
-.col-name {
-	width: auto;
-}
-
-.col-sort {
-	width: 100px;
-	text-align: center;
-}
-
-.col-date {
-	width: 180px;
-}
-
 .text-center {
 	text-align: center;
 }
 
-.code-badge {
-	background-color: #f0f2f5;
-	padding: 5px 12px;
-	border-radius: 8px;
-	font-family: 'Consolas', monospace;
-	font-weight: 600;
-	color: #4b5563;
-	font-size: 13px;
+.text-left {
+	text-align: left;
+}
+
+.col-no {
+	width: 80px;
+}
+
+.col-id {
+	width: 120px;
+}
+
+.col-pw {
+	width: auto;
+	max-width: 250px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.col-name {
+	width: 140px;
+}
+
+.col-job {
+	width: 140px;
+}
+
+.col-date {
+	width: 180px;
 }
 
 .name-link {
@@ -153,11 +153,6 @@ tbody tr:hover {
 .name-link:hover {
 	color: #0056b3;
 	text-decoration: underline;
-}
-
-.date-text {
-	color: #8b95a1;
-	font-size: 14px;
 }
 
 .empty-row {
@@ -175,9 +170,9 @@ tbody tr:hover {
 	<div class="content-container">
 		<div class="list-header">
 			<h2>
-				<spring:message code="codedetail.header.list" />
+				<spring:message code="user.header.list" />
 			</h2>
-			<a href="register" class="btn-register"> <i
+			<a href="/user/register" class="btn-register"> <i
 				data-lucide="plus-circle" class="btn-icon"></i> <spring:message
 					code="action.new" />
 			</a>
@@ -187,38 +182,39 @@ tbody tr:hover {
 			<table>
 				<thead>
 					<tr>
-						<th class="col-group"><spring:message
-								code="codedetail.groupCode" /></th>
-						<th class="col-value"><spring:message
-								code="codedetail.codeValue" /></th>
-						<th class="col-name"><spring:message
-								code="codedetail.codeName" /></th>
-						<th class="col-sort"><spring:message
-								code="codedetail.sortSeq" /></th>
-						<th class="col-date"><spring:message
-								code="codedetail.regdate" /></th>
+						<th class="col-no text-center"><spring:message code="user.no" /></th>
+						<th class="col-id text-center"><spring:message
+								code="user.userId" /></th>
+						<th class="col-pw text-center"><spring:message
+								code="user.userPw" /></th>
+						<th class="col-name text-center"><spring:message
+								code="user.userName" /></th>
+						<th class="col-job text-center"><spring:message
+								code="user.job" /></th>
+						<th class="col-date text-center"><spring:message
+								code="user.regdate" /></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:choose>
 						<c:when test="${empty list}">
 							<tr>
-								<td colspan="5" class="empty-row"><spring:message
+								<td colspan="6" class="empty-row"><spring:message
 										code="common.listEmpty" /></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${list}" var="codeDetail">
+							<c:forEach items="${list}" var="member">
 								<tr>
-									<td><span class="code-badge">${codeDetail.groupCode}</span></td>
-									<td><span class="code-badge">${codeDetail.codeValue}</span></td>
-									<td><a
-										href="/codedetail/read?groupCode=${codeDetail.groupCode}&codeValue=${codeDetail.codeValue}"
-										class="name-link"> ${codeDetail.codeName} </a></td>
-									<td class="text-center">${codeDetail.sortSeq}</td>
-									<td><span class="date-text"> <fmt:formatDate
-												pattern="yyyy-MM-dd HH:mm" value="${codeDetail.regDate}" />
-									</span></td>
+									<td class="text-center">${member.userNo}</td>
+									<td class="text-center"><a
+										href='/user/read?userNo=${member.userNo}' class="name-link">
+											${member.userId} </a></td>
+									<td class="text-left col-pw">${member.userPw}</td>
+									<td class="text-center">${member.userName}</td>
+									<td class="text-center">${member.job}</td>
+									<td class="text-center"><fmt:formatDate
+											pattern="yyyy-MM-dd HH:mm" value="${member.regDate}" /></td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

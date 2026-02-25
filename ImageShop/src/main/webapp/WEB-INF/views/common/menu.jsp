@@ -17,9 +17,14 @@
 	table-layout: fixed;
 }
 
+.nav-table tr {
+	display: table-row !important; 
+}
+
 .nav-item {
 	padding: 0;
 	text-align: center;
+	display: table-cell !important; 
 }
 
 .nav-link {
@@ -61,17 +66,18 @@
 			<td class="nav-item"><a href="/" class="nav-link"> <spring:message
 						code="header.home" />
 			</a></td>
-			<td class="nav-item"><a href="/codegroup/list" class="nav-link"><spring:message code="menu.codegroup.list" />
+			<td class="nav-item"><a href="/codegroup/list" class="nav-link">
+					<spring:message code="menu.codegroup.list" />
 			</a></td>
-			<td class="nav-item"><a href="/codedetail/list" class="nav-link"><spring:message code="menu.codedetail.list" />
+			<td class="nav-item"><a href="/codedetail/list" class="nav-link">
+					<spring:message code="menu.codedetail.list" />
 			</a></td>
-			<!-- 회원 관리 메뉴 -->
-			<td class="nav-item"><a href="/user/list" class="nav-link"><spring:message code="menu.user.admin" />
+			<td class="nav-item"><a href="/user/list" class="nav-link">
+					<spring:message code="menu.user.admin" />
 			</a></td>
-			<td class="nav-item"><a href="/user/register" class="nav-link"><spring:message code="header.joinMember" />
+			<td class="nav-item"><a href="/user/register" class="nav-link">
+					<spring:message code="header.joinMember" />
 			</a></td>
-			
-			
 		</tr>
 	</table>
 </div>

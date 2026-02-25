@@ -44,6 +44,7 @@ body {
 	color: #1a1a1a;
 	letter-spacing: -0.5px;
 }
+
 .btn-register {
 	background-color: #007aff;
 	color: white !important;
@@ -64,6 +65,11 @@ body {
 	background-color: #0063d1;
 	transform: translateY(-2px);
 	box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
+}
+
+.btn-icon {
+	width: 20px;
+	height: 20px;
 }
 
 .table-card {
@@ -104,6 +110,22 @@ tbody tr:hover {
 	cursor: pointer;
 }
 
+.text-center {
+	text-align: center;
+}
+
+.col-group-code {
+	width: 25%;
+}
+
+.col-group-name {
+	width: 45%;
+}
+
+.col-regdate {
+	width: 30%;
+}
+
 .code-badge {
 	background-color: #f0f4f8;
 	padding: 6px 12px;
@@ -137,6 +159,13 @@ tbody tr:hover {
 	color: #abb5c2;
 	line-height: 1.6;
 }
+
+.empty-icon {
+	width: 40px;
+	height: 40px;
+	margin-bottom: 10px;
+	opacity: 0.3;
+}
 </style>
 </head>
 <body>
@@ -149,7 +178,7 @@ tbody tr:hover {
 				<spring:message code="codegroup.header.list" />
 			</h2>
 			<a href="/codegroup/register" class="btn-register"> <i
-				data-lucide="plus-circle" style="width: 20px; height: 20px;"></i> <spring:message
+				data-lucide="plus-circle" class="btn-icon"></i> <spring:message
 					code="codegroup.header.register" />
 			</a>
 		</div>
@@ -158,11 +187,11 @@ tbody tr:hover {
 			<table>
 				<thead>
 					<tr>
-						<th style="width: 25%; text-align: center;"><spring:message
+						<th class="col-group-code text-center"><spring:message
 								code="codegroup.groupCode" /></th>
-						<th style="width: 45%;"><spring:message
+						<th class="col-group-name"><spring:message
 								code="codegroup.groupName" /></th>
-						<th style="width: 30%; text-align: center;"><spring:message
+						<th class="col-regdate text-center"><spring:message
 								code="codegroup.regdate" /></th>
 					</tr>
 				</thead>
@@ -171,21 +200,20 @@ tbody tr:hover {
 						<c:when test="${empty list}">
 							<tr>
 								<td colspan="3" class="empty-row"><i data-lucide="folder-x"
-									style="width: 40px; height: 40px; margin-bottom: 10px; opacity: 0.3;"></i><br>
-									<spring:message code="common.listEmpty" /></td>
+									class="empty-icon"></i><br> <spring:message
+										code="common.listEmpty" /></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="codeGroup">
 								<tr>
-									<td style="text-align: center;"><span class="code-badge">${codeGroup.groupCode}</span>
+									<td class="text-center"><span class="code-badge">${codeGroup.groupCode}</span>
 									</td>
 									<td><a
 										href="/codegroup/read?groupCode=${codeGroup.groupCode}"
 										class="name-link"> ${codeGroup.groupName} </a></td>
-									<td style="text-align: center;"><span class="date-text">
-											<fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-												value="${codeGroup.regDate}" />
+									<td class="text-center"><span class="date-text"> <fmt:formatDate
+												pattern="yyyy-MM-dd HH:mm" value="${codeGroup.regDate}" />
 									</span></td>
 								</tr>
 							</c:forEach>
@@ -200,15 +228,13 @@ tbody tr:hover {
 
 	<script>
 		$(document).ready(function() {
-			// 아이콘 활성화
 			lucide.createIcons();
 
 			var result = "${msg}";
 			if (result === "SUCCESS") {
-				// 단순 얼럿보다 조금 더 세련되게 (원하신다면 스위트얼럿 등으로 대체 가능)
 				alert("<spring:message code='common.processSuccess' />");
 			} else if (result === "Fail") {
-				altert("삭제 처리 실패")
+				alert("삭제 처리 실패");
 			}
 		});
 	</script>

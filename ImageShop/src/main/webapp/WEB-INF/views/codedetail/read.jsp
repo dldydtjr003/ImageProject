@@ -13,7 +13,7 @@
 
 <style>
 body {
-	background-color: #f5f7fa; 
+	background-color: #f5f7fa;
 	font-family: 'Pretendard', sans-serif;
 	margin: 0;
 	color: #333;
@@ -30,9 +30,10 @@ body {
 .register-card {
 	background: #ffffff;
 	width: 100%;
-	max-width: 450px;
+	max-width: 480px; 
 	padding: 40px;
-	border-radius: 20px;
+	border-radius: 24px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 h2 {
@@ -54,74 +55,97 @@ tr {
 	margin-bottom: 20px;
 }
 
-td:first-child {
+.label-cell {
 	font-size: 14px;
 	font-weight: 600;
 	color: #555;
 	margin-bottom: 8px;
 }
 
-input[type="text"] {
+.form-control {
 	width: 100%;
 	padding: 14px 16px;
 	border: 1px solid #e1e4e8;
-	border-radius: 10px;
+	border-radius: 12px;
 	font-size: 15px;
 	background-color: #f9fbff;
 	transition: all 0.2s;
 	box-sizing: border-box;
+	appearance: none; 
+	-webkit-appearance: none;
 }
 
-input[type="text"]:focus {
+.form-control:focus {
 	outline: none;
 	border-color: #007aff;
 	background-color: #fff;
+	box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
 }
 
-font[color="red"] {
+.form-control:disabled, .form-control[readonly] {
+	background-color: #f1f3f5;
+	color: #adb5bd;
+	cursor: not-allowed;
+	border-color: #e9ecef;
+}
+
+.error-msg {
 	font-size: 12px;
-	margin-top: 5px;
+	color: #ff4d4f;
+	margin-top: 6px;
 	display: block;
 	font-weight: 500;
 }
 
 .btn-container {
 	display: flex;
-	gap: 12px;
-	margin-top: 10px;
+	gap: 10px; 
+	margin-top: 20px;
 }
 
-button {
-	flex: 1;
-	height: 50px;
-	border-radius: 10px;
+.btn {
+	flex: 1; 
+	height: 52px;
+	border-radius: 12px;
 	font-size: 15px;
 	font-weight: 600;
 	cursor: pointer;
 	transition: all 0.2s;
 	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-#btnRegister {
+.btn-primary {
 	background-color: #007aff;
 	color: white;
 }
 
-#btnRegister:hover {
+.btn-primary:hover {
 	background-color: #0063d1;
 	transform: translateY(-1px);
 }
 
-#btnList {
+.btn-danger {
+	background-color: #fff1f0;
+	color: #ff4d4f;
+}
+
+.btn-danger:hover {
+	background-color: #ffccc7;
+}
+
+.btn-secondary {
 	background-color: #f0f2f5;
 	color: #4b5563;
 }
 
-#btnList:hover {
+.btn-secondary:hover {
 	background-color: #e4e7eb;
 }
 
-button:active {
+.btn:active {
 	transform: scale(0.98);
 }
 </style>
@@ -136,36 +160,41 @@ button:active {
 				<spring:message code="codegroup.header.read" />
 			</h2>
 
-			<form:form modelAttribute="codeDetail">
-			<form:hidden path="groupCode"/>
+			<form:form modelAttribute="codeDetail" id="codeDetailForm">
+				<form:hidden path="groupCode" />
 				<table>
 					<tr>
-						<td><spring:message code="codedetail.groupCode" /></td>
+						<td class="label-cell"><spring:message
+								code="codedetail.groupCode" /></td>
 						<td><form:select path="groupCode" items="${groupCodeList}"
-								itemValue="value" itemLabel="label" disabled="true" /></td>
-						<td><font color="red"><form:errors path="groupCode" /></font></td>
+								itemValue="value" itemLabel="label" disabled="true"
+								class="form-control" /></td>
+						<td><form:errors path="groupCode" cssClass="error-msg" /></td>
 					</tr>
 					<tr>
-						<td><spring:message code="codedetail.codeValue" /></td>
-						<td><form:input path="codeValue" readonly="true" /></td>
-						<td><font color="red"><form:errors path="codeValue" /></font></td>
+						<td class="label-cell"><spring:message
+								code="codedetail.codeValue" /></td>
+						<td><form:input path="codeValue" readonly="true"
+								class="form-control" /></td>
+						<td><form:errors path="codeValue" cssClass="error-msg" /></td>
 					</tr>
 					<tr>
-						<td><spring:message code="codedetail.codeName" /></td>
-						<td><form:input path="codeName"/></td>
-						<td><font color="red"><form:errors path="codeName" /></font></td>
+						<td class="label-cell"><spring:message
+								code="codedetail.codeName" /></td>
+						<td><form:input path="codeName" class="form-control" /></td>
+						<td><form:errors path="codeName" cssClass="error-msg" /></td>
 					</tr>
 				</table>
 			</form:form>
 
 			<div class="btn-container">
-				<button type="button" id="btnEdit">
+				<button type="button" id="btnEdit" class="btn btn-primary">
 					<spring:message code="action.edit" />
 				</button>
-				<button type="button" id="btnRemove">
+				<button type="button" id="btnRemove" class="btn btn-danger">
 					<spring:message code="action.remove" />
 				</button>
-				<button type="button" id="btnList">
+				<button type="button" id="btnList" class="btn btn-secondary">
 					<spring:message code="action.list" />
 				</button>
 			</div>
@@ -176,12 +205,10 @@ button:active {
 
 	<script>
 		$(document).ready(function() {
-			// 3. 폼 객체를 정확한 ID로 선택
-			var formObj = $("#codeDetail");
+			var formObj = $("#codeDetailForm");
 
 			// 편집 버튼
 			$("#btnEdit").on("click", function() {
-				// input의 id로 값을 정확히 가져옴
 				formObj.attr("action", "/codedetail/modify");
 				formObj.attr("method", "post");
 				formObj.submit();
@@ -190,9 +217,8 @@ button:active {
 			// 삭제 버튼
 			$("#btnRemove").on("click", function() {
 				if (confirm("정말로 삭제하시겠습니까?")) {
-					// 4. 경로를 현재 위치 기준 상대 경로로 적거나 명확히 설정
 					formObj.attr("action", "/codedetail/remove");
-					formObj.attr("method", "get");
+					formObj.attr("method", "post"); // 삭제는 보안상 post 권장
 					formObj.submit();
 				}
 			});
