@@ -10,6 +10,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.project.common.security.CustomAccessDeniedHandler;
+import com.project.common.security.CustomLoginSuccessHandler;
 
 import jakarta.servlet.DispatcherType;
 import lombok.extern.slf4j.Slf4j;
@@ -45,18 +50,16 @@ public class SecurityConfig {
 		// 3. 접근 거부시 예외처리 설정 (/accessError 페이지 이동)
 		// httpSecurity.exceptionHandling(exception ->
 		// exception.accessDeniedPage("/accessError"));
-		// httpSecurity.exceptionHandling(exception ->
-		// exception.accessDeniedHandler(createAccessDeniedHandler()));
+		 httpSecurity.exceptionHandling(exception ->
+		 	exception.accessDeniedHandler(createAccessDeniedHandler()));
 
 		// 4. 기본폼 로그인 활성화
 		// httpSecurity.formLogin(Customizer.withDefaults());
-		/*
-		 * httpSecurity.formLogin(form -> form.loginPage("/login") // 커스텀 로그인 페이지 URL
-		 * .loginProcessingUrl("/login") // 로그인 폼 Action URL (Security가 낚아챔) //
-		 * .defaultSuccessUrl("/board/list") // 성공시 기본 화면 설정
-		 * .successHandler(createAuthenticationSuccessHandler()).permitAll() // 로그인 페이지는
-		 * 누구나 접근 가능해야 함 .permitAll());
-		 */
+
+		httpSecurity.formLogin(form -> form.loginPage("/auth/login") // 커스텀 로그인 페이지 URL
+				.loginProcessingUrl("/login") // 로그인 폼 Action URL (Security가 낚아챔) //
+				// .defaultSuccessUrl("/board/list") // 성공시 기본 화면 설정
+				.successHandler(createAuthenticationSuccessHandler()).permitAll()); // 로그인 페이지는 누구나 접근 가능해야 함
 
 		/*
 		 * // 5. 로그아웃 설정 수정 httpSecurity.logout(logout -> logout.logoutUrl("/logout") //
@@ -74,9 +77,20 @@ public class SecurityConfig {
 
 		return httpSecurity.build();
 	}
+
 	@Bean
 	public PasswordEncoder createPasswordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public AuthenticationSuccessHandler createAuthenticationSuccessHandler() {
+		return new CustomLoginSuccessHandler();
+	}
+
+	@Bean
+	public AccessDeniedHandler createAccessDeniedHandler() {
+		return new CustomAccessDeniedHandler();
 	}
 	/*
 	 * 
@@ -89,14 +103,6 @@ public class SecurityConfig {
 	 * auth.userDetailsService(createUserDetailsService()).passwordEncoder(
 	 * createPasswordEncoder()); } // 3. 접근거부시 예외처리 설정을 클래스로 이동한다.
 	 * 
-	 * @Bean public AccessDeniedHandler createAccessDeniedHandler() { return new
-	 * CustomAccessDeniedHandler(); }
-	 * 
-	 * // CustomLoginSuccessHandler를 빈으로 등록한다.
-	 * 
-	 * @Bean public AuthenticationSuccessHandler
-	 * createAuthenticationSuccessHandler() { return new
-	 * CustomLoginSuccessHandler(); }
 	 * 
 	 * // 스프링 시큐리티의 UserDetailsService를 구현한 클래스를 빈으로 등록한다.
 	 * 
@@ -104,5 +110,5 @@ public class SecurityConfig {
 	 * CustomUserDetailsService(); }
 	 */
 	// 사용자가 정의한 비번 암호화 처리기를 빈으로 등록한다.
-	
+
 }
