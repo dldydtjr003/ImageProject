@@ -63,9 +63,6 @@
 <div class="nav-menu-wrapper">
 	<table class="nav-table">
 		<tr>
-			<td class="nav-item"><a href="/" class="nav-link"> <spring:message
-						code="header.home" />
-			</a></td>
 			<td class="nav-item"><a href="/codegroup/list" class="nav-link">
 					<spring:message code="menu.codegroup.list" />
 			</a></td>

@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%> 
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +49,7 @@ h2 {
 table {
 	width: 100%;
 	border-collapse: separate;
-	border-spacing: 0 15px; 
+	border-spacing: 0 15px;
 }
 
 tr {
@@ -142,24 +143,18 @@ button:active {
 	<div class="register-wrapper">
 		<div class="register-card">
 			<h2>
-				<spring:message code="user.header.register" />
+				<spring:message code="user.header.modify" />
 			</h2>
 
-			<form:form modelAttribute="member" action="/user/setup"
-				method="post" id="memberForm">
+			<form:form modelAttribute="member" action="/user/modify2" method="post">
+				<form:hidden path="userNo" />
+				<form:hidden path="userId" />
 				<table>
 					<tr>
 						<td><spring:message code="user.userId" /></td>
-						<td><form:input path="userId" placeholder="아이디" />
+						<td><form:input path="userId" placeholder="아이디" disabled="true"/>
 							<div class="error-msg-cell">
 								<form:errors path="userId" cssClass="error-msg" />
-							</div></td>
-					</tr>
-					<tr>
-						<td><spring:message code="user.userPw" /></td>
-						<td><form:password path="userPw" placeholder="비밀번호" />
-							<div class="error-msg-cell">
-								<form:errors path="userPw" cssClass="error-msg" />
 							</div></td>
 					</tr>
 					<tr>
@@ -169,17 +164,52 @@ button:active {
 								<form:errors path="userName" cssClass="error-msg" />
 							</div></td>
 					</tr>
-					
+					<tr>
+						<td><spring:message code="user.job" /></td>
+						<td><form:select path="job" items="${jobList}"
+								itemValue="value" itemLabel="label" />
+							<div class="error-msg-cell">
+								<form:errors path="job" cssClass="error-msg" />
+							</div></td>
+					</tr>
+					<tr>
+						<td><spring:message code="user.auth" /> - 1</td>
+						<td><form:select path="authList[0].auth" disabled="true">
+								<form:option value="" label="=== 선택해 주세요 ===" />
+								<form:option value="ROLE_USER" label="사용자" />
+								<form:option value="ROLE_MEMBER" label="회원" />
+								<form:option value="ROLE_ADMIN" label="관리자" />
+							</form:select></td>
+					</tr>
+					<tr>
+						<td><spring:message code="user.auth" /> - 2</td>
+						<td><form:select path="authList[1].auth" disabled="true">
+								<form:option value="" label="=== 선택해 주세요 ===" />
+								<form:option value="ROLE_USER" label="사용자" />
+								<form:option value="ROLE_MEMBER" label="회원" />
+								<form:option value="ROLE_ADMIN" label="관리자" />
+							</form:select></td>
+					</tr>
+					<tr>
+						<td><spring:message code="user.auth" /> - 3</td>
+						<td><form:select path="authList[2].auth" disabled="true">
+								<form:option value="" label="=== 선택해 주세요 ===" />
+								<form:option value="ROLE_USER" label="사용자" />
+								<form:option value="ROLE_MEMBER" label="회원" />
+								<form:option value="ROLE_ADMIN" label="관리자" />
+							</form:select></td>
+					</tr>
 				</table>
 			</form:form>
 
 			<div class="btn-container">
-				<button type="button" id="btnList">
-					<spring:message code="action.list" />
-				</button>
-				
-				<button type="button" id="btnRegister">
-					<spring:message code="action.register" />
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<button type="button" id="btnList">
+						<spring:message code="action.list" />
+					</button>
+				</sec:authorize>
+				<button type="button" id="btnModify">
+					<spring:message code="action.modify" />
 				</button>
 			</div>
 		</div>
@@ -189,11 +219,12 @@ button:active {
 
 	<script>
 		$(document).ready(function() {
-			let formObj = $("#memberForm");
+			let formObj = $("#member");
 
-			$("#btnRegister").on("click", function() {
+			$("#btnModify").on("click", function() {
 				formObj.submit();
 			});
+
 			$("#btnList").on("click", function() {
 				self.location = "/user/list";
 			});

@@ -145,7 +145,7 @@ button:active {
 				<spring:message code="user.header.register" />
 			</h2>
 
-			<form:form modelAttribute="member" action="/user/setup"
+			<form:form modelAttribute="member" action="/user/register"
 				method="post" id="memberForm">
 				<table>
 					<tr>
@@ -169,14 +169,23 @@ button:active {
 								<form:errors path="userName" cssClass="error-msg" />
 							</div></td>
 					</tr>
-					
+					<tr>
+						<td><spring:message code="user.job" /></td>
+						<td><form:select path="job" items="${jobList}"
+								itemValue="value" itemLabel="label" />
+							<div class="error-msg-cell">
+								<form:errors path="job" cssClass="error-msg" />
+							</div></td>
+					</tr>
 				</table>
 			</form:form>
 
 			<div class="btn-container">
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<button type="button" id="btnList">
 					<spring:message code="action.list" />
 				</button>
+				</sec:authorize>
 				
 				<button type="button" id="btnRegister">
 					<spring:message code="action.register" />

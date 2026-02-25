@@ -67,7 +67,7 @@ public class CodeDetailController {
 	}
 
 	// 삭제 처리
-	@GetMapping("/remove")
+	@PostMapping("/remove")
 	public String remove(CodeDetail codeDetail, RedirectAttributes rttr) throws Exception {
 		int count = codeDetailService.remove(codeDetail);
 		if (count != 0) {

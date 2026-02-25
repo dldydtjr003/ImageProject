@@ -161,13 +161,12 @@ tr {
 			</h2>
 
 			<form:form modelAttribute="codeDetail" id="codeDetailForm">
-				<form:hidden path="groupCode" />
 				<table>
 					<tr>
 						<td class="label-cell"><spring:message
 								code="codedetail.groupCode" /></td>
 						<td><form:select path="groupCode" items="${groupCodeList}"
-								itemValue="value" itemLabel="label" disabled="true"
+								itemValue="value" itemLabel="label" 
 								class="form-control" /></td>
 						<td><form:errors path="groupCode" cssClass="error-msg" /></td>
 					</tr>
@@ -217,6 +216,7 @@ tr {
 			// 삭제 버튼
 			$("#btnRemove").on("click", function() {
 				if (confirm("정말로 삭제하시겠습니까?")) {
+					$("#groupCode").removeAttr("disabled");
 					formObj.attr("action", "/codedetail/remove");
 					formObj.attr("method", "post"); // 삭제는 보안상 post 권장
 					formObj.submit();
