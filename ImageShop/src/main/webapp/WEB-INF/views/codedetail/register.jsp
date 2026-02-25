@@ -193,7 +193,7 @@ button:active {
 	<script>
 		$(document).ready(function() {
 			// 명시적 ID 선택으로 안정성 확보
-			var formObj = $("#codedetailForm");
+			let formObj = $("#codedetailForm");
 
 			$("#btnRegister").on("click", function() {
 				formObj.submit();

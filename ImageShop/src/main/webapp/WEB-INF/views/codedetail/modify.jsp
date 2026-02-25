@@ -175,7 +175,7 @@ button:active {
 	<script>
 		$(document).ready(function() {
 			// 3. 폼 객체를 정확한 ID로 선택
-			var formObj = $("#codedetail");
+			let formObj = $("#codedetail");
 
 			// 편집 버튼
 			$("#btnModify").on("click", function() {

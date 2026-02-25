@@ -205,7 +205,7 @@ tr {
 
 	<script>
 		$(document).ready(function() {
-			var formObj = $("#codeDetailForm");
+			let formObj = $("#codeDetailForm");
 
 			// 편집 버튼
 			$("#btnEdit").on("click", function() {

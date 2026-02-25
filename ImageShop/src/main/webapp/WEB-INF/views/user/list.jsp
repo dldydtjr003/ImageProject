@@ -174,7 +174,7 @@ tbody tr:hover {
 			</h2>
 			<a href="/user/register" class="btn-register"> <i
 				data-lucide="plus-circle" class="btn-icon"></i> <spring:message
-					code="action.new" />
+					code="header.joinMember" />
 			</a>
 		</div>
 

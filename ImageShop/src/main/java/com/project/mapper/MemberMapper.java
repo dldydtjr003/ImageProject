@@ -12,4 +12,15 @@ public interface MemberMapper {
 	public void createAuth(MemberAuth memberAuth) throws Exception;
 
 	public List<Member> list() throws Exception;
+
+	public Member read(Member member) throws Exception;
+
+	public int modify(Member member) throws Exception;
+
+	public void deleteAuth(Member member) throws Exception;
+
+	public void modifyAuth(MemberAuth memberAuth) throws Exception;
+
+	public int remove(Member member) throws Exception;
+
 }

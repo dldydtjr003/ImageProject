@@ -19,21 +19,59 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	@Transactional
 	public int register(Member member) throws Exception {
-		
+
 		int count = mapper.register(member);
-		
-		if(count != 0) {
-			//회원 권한 생성
-			MemberAuth memberAuth = new MemberAuth(); 
-			memberAuth.setAuth("ROLE_MEMBER"); 
+
+		if (count != 0) {
+			// 회원 권한 생성
+			MemberAuth memberAuth = new MemberAuth();
+			memberAuth.setAuth("ROLE_MEMBER");
 			mapper.createAuth(memberAuth);
 		}
 		return count;
-		 
+
 	}
 
 	@Override
 	public List<Member> list() throws Exception {
 		return mapper.list();
+	}
+
+	@Override
+	public Member read(Member member) throws Exception {
+		return mapper.read(member);
+	}
+
+	@Override
+	@Transactional
+	public int modify(Member member) throws Exception {
+		// 회원정보 수정
+		int count = mapper.modify(member);
+		// 회원권한 삭제
+		mapper.deleteAuth(member);
+		// 사용자가 선택한 권한내용 가져오기
+		List<MemberAuth> authList = member.getAuthList();
+
+		if (authList != null) {
+			for (int i = 0; i < authList.size(); i++) {
+				MemberAuth memberAuth = authList.get(i);
+				String auth = memberAuth.getAuth();
+
+				if (auth == null || auth.trim().length() == 0) {
+					continue;
+				}
+				// 변경된 회원권한 추가
+				memberAuth.setUserNo(member.getUserNo());
+				mapper.modifyAuth(memberAuth);
+			}
+		}
+		return count;
+	}
+
+	@Override
+	@Transactional
+	public int remove(Member member) throws Exception {
+		mapper.deleteAuth(member);
+		return mapper.remove(member);
 	}
 }

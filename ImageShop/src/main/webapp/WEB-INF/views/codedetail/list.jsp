@@ -234,7 +234,7 @@ tbody tr:hover {
 		$(document).ready(function() {
 			lucide.createIcons();
 
-			var result = "${msg}";
+			let result = "${msg}";
 			if (result === "SUCCESS") {
 				alert("<spring:message code='common.processSuccess' />");
 			} else if (result === "FAIL") {
