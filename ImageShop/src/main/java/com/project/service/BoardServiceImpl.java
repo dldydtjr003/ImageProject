@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.domain.Board;
+import com.project.domain.PageRequest;
 import com.project.mapper.BoardMapper;
 
 @Service
@@ -25,6 +26,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> list() throws Exception {
 		return mapper.list();
 	}
+	
+	@Override
+	public List<Board> list(PageRequest pageRequest) throws Exception {
+		return mapper.list(pageRequest);
+	}
 
 	@Override
 	public Board read(Board board) throws Exception {
@@ -42,4 +48,10 @@ public class BoardServiceImpl implements BoardService {
 	public int remove(Board board) throws Exception {
 		return mapper.remove(board);
 	}
+
+	@Override
+	public int count() throws Exception {
+		return mapper.count();
+	}
+
 }

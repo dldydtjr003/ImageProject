@@ -63,7 +63,6 @@ body {
 .btn-register:hover {
 	background-color: #0063d1;
 	transform: translateY(-2px);
-	box-shadow: 0 6px 20px rgba(0, 122, 255, 0.3);
 }
 
 .btn-icon {
@@ -77,6 +76,7 @@ body {
 	overflow: hidden;
 	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
 	border: 1px solid #eef0f2;
+	margin-bottom: 25px;
 }
 
 table {
@@ -92,8 +92,7 @@ thead th {
 	color: #64748b;
 	border-bottom: 1px solid #f1f5f9;
 	text-transform: uppercase;
-	letter-spacing: 0.5px;
-	text-align: center; 
+	text-align: center;
 }
 
 .col-no {
@@ -102,9 +101,10 @@ thead th {
 
 .col-title {
 	text-align: left !important;
-} 
+}
+
 .col-writer {
-	width: 120px;
+	width: 150px;
 }
 
 .col-date {
@@ -116,24 +116,12 @@ tbody td {
 	font-size: 15px;
 	color: #334155;
 	border-bottom: 1px solid #f8fafc;
-	vertical-align: middle;
 	text-align: center;
+	vertical-align: middle;
 }
 
 tbody tr:hover {
 	background-color: #fbfcfe;
-}
-
-tbody tr:last-child td {
-	border-bottom: none;
-}
-
-.td-no {
-	color: #94a3b8;
-}
-
-.td-title {
-	text-align: left;
 }
 
 .title-link {
@@ -141,6 +129,7 @@ tbody tr:last-child td {
 	text-decoration: none;
 	font-weight: 600;
 	transition: color 0.2s;
+	display: inline-block;
 }
 
 .title-link:hover {
@@ -149,7 +138,6 @@ tbody tr:last-child td {
 
 .writer-text {
 	color: #64748b;
-	font-weight: 500;
 }
 
 .date-text {
@@ -157,18 +145,51 @@ tbody tr:last-child td {
 	font-size: 14px;
 }
 
+.pagination-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px 0 40px 0;
+	gap: 6px;
+}
+
+.pagination-wrapper a {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 40px;
+	height: 40px;
+	padding: 0 8px;
+	text-decoration: none;
+	color: #64748b;
+	font-size: 14px;
+	font-weight: 600;
+	border-radius: 12px;
+	transition: all 0.2s;
+}
+
+.pagination-wrapper a:hover {
+	background-color: #e2e8f0;
+	color: #1e293b;
+}
+
+.pagination-wrapper a.active-page {
+	background-color: #007aff;
+	color: white !important;
+	box-shadow: 0 4px 10px rgba(0, 122, 255, 0.25);
+}
+
+/* 5. 빈 목록 상태 */
 .empty-row {
 	text-align: center;
-	padding: 100px 0 !important;
+	padding: 80px 0 !important;
 	color: #94a3b8;
-	font-size: 16px;
 }
 
 .empty-icon {
-	display: block;
-	margin: 0 auto 15px;
 	width: 48px;
 	height: 48px;
+	margin-bottom: 10px;
 	opacity: 0.3;
 }
 </style>
@@ -182,7 +203,6 @@ tbody tr:last-child td {
 			<h2>
 				<spring:message code="board.header.list" />
 			</h2>
-
 			<sec:authorize access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')">
 				<a href="/board/register" class="btn-register"> <i
 					data-lucide="plus-circle" class="btn-icon"></i> <spring:message
@@ -197,6 +217,7 @@ tbody tr:last-child td {
 					<tr>
 						<th class="col-no"><spring:message code="board.no" /></th>
 						<th class="col-title"><spring:message code="board.title" /></th>
+						<th class="col-writer"><spring:message code="board.content" /></th>
 						<th class="col-writer"><spring:message code="board.writer" /></th>
 						<th class="col-date"><spring:message code="board.regdate" /></th>
 					</tr>
@@ -205,18 +226,19 @@ tbody tr:last-child td {
 					<c:choose>
 						<c:when test="${empty list}">
 							<tr>
-								<td colspan="4" class="empty-row"><i
-									data-lucide="folder-open" class="empty-icon"></i> <spring:message
+								<td colspan="4" class="empty-row"><i data-lucide="folder-x"
+									class="empty-icon"></i><br> <spring:message
 										code="common.listEmpty" /></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="board">
 								<tr>
-									<td class="td-no">${board.boardNo}</td>
-									<td class="td-title"><a
-										href='/board/read?boardNo=${board.boardNo}' class="title-link">
-											${board.title} </a></td>
+									<td>${board.boardNo}</td>
+									<td class="col-title"><a
+										href='/board/read${pagination.makeQuery(pagination.pageRequest.page)}&boardNo=${board.boardNo}'
+										class="title-link"> ${board.title} </a></td>
+									<td class="writer-text">${board.content}</td>
 									<td class="writer-text">${board.writer}</td>
 									<td class="date-text"><fmt:formatDate
 											pattern="yyyy-MM-dd HH:mm" value="${board.regDate}" /></td>
@@ -227,6 +249,30 @@ tbody tr:last-child td {
 				</tbody>
 			</table>
 		</div>
+
+		<div class="pagination-wrapper">
+			<c:if test="${pagination.prev}">
+				<a
+					href="/board/list${pagination.makeQuery(pagination.startPage - 1)}">&laquo;</a>
+			</c:if>
+
+			<c:forEach begin="${pagination.startPage}"
+				end="${pagination.endPage}" var="idx">
+				<c:choose>
+					<c:when test="${pagination.pageRequest.page eq idx}">
+						<a href="/board/list${pagination.makeQuery(idx)}"
+							class="active-page">${idx}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="/board/list${pagination.makeQuery(idx)}">${idx}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<c:if test="${pagination.next && pagination.endPage > 0}">
+				<a href="/board/list${pagination.makeQuery(pagination.endPage + 1)}">&raquo;</a>
+			</c:if>
+		</div>
 	</div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -234,7 +280,6 @@ tbody tr:last-child td {
 	<script>
 		$(document).ready(function() {
 			lucide.createIcons();
-
 			var result = "${msg}";
 			if (result === "SUCCESS") {
 				alert("<spring:message code='common.processSuccess' />");

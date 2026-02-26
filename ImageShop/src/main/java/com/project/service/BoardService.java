@@ -3,6 +3,7 @@ package com.project.service;
 import java.util.List;
 
 import com.project.domain.Board;
+import com.project.domain.PageRequest;
 
 public interface BoardService {
 
@@ -10,11 +11,14 @@ public interface BoardService {
 
 	public List<Board> list() throws Exception;
 
+	public List<Board> list(PageRequest pageRequest) throws Exception;
+	
 	public Board read(Board board) throws Exception;
 
 	public int modify(Board board) throws Exception;
 
 	public int remove(Board board) throws Exception;
 
+	public int count() throws Exception;
 
 }

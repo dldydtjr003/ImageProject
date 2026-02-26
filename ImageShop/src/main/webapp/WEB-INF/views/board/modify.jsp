@@ -197,6 +197,10 @@ button:active {
 			<form:form modelAttribute="board" action="/board/modify"
 				method="post">
 				<form:hidden path="boardNo" />
+				<!-- 현재 페이지 번호와 페이징 크기를 숨겨진 필드 요소를 사용하여 전달한다. -->
+				<input type="hidden" id="page" name="page" value="${pgrq.page}">
+				<input type="hidden" id="sizePerPage" name="sizePerPage"
+					value="${pgrq.sizePerPage}">
 				<table>
 					<tr>
 						<td><spring:message code="board.title" /></td>
@@ -255,11 +259,11 @@ button:active {
 				formObj.submit();
 			});
 			$("#btnRemove").on("click", function() {
-				let boardNo = $("#boardNo")
-				self.location = "/board/remove?boardNo=" + boardNo.val();
+				let boardNo = $("#boardNo").val();
+				self.location = "/board/remove?${pgrq.toUriString()}&boardNo=" + boardNo;
 			});
 			$("#btnList").on("click", function() {
-				self.location = "/board/list";
+				self.location = "/board/list${pgrq.toUriString()}";
 			});
 		});
 	</script>
