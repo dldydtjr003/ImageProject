@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <style>
 .nav-menu-wrapper {
 	background-color: #ffffff;
@@ -65,7 +66,9 @@
 		<tr>
 			<!-- 인증을 하지 않았을 때 메뉴 -->
 			<sec:authorize access="!isAuthenticated()">
-
+				<td class="nav-item"><a href="/board/list" class="nav-link">
+						<spring:message code="board.header.list" />
+				</a></td>
 			</sec:authorize>
 
 			<!-- 인증을 했을 때 메뉴 (인가: 관리자, 회원, 매니저) -->
@@ -82,9 +85,15 @@
 					<td class="nav-item"><a href="/user/list" class="nav-link">
 							<spring:message code="menu.user.admin" />
 					</a></td>
+					<td class="nav-item"><a href="/board/list" class="nav-link">
+							<spring:message code="board.header.list" />
+					</a></td>
 				</sec:authorize>
 				<!-- 인증완료 인가 : 회원 -->
 				<sec:authorize access="hasRole('ROLE_MEMBER')">
+					<td class="nav-item"><a href="/board/list" class="nav-link">
+							<spring:message code="board.header.list" />
+					</a></td>
 
 				</sec:authorize>
 			</sec:authorize>
