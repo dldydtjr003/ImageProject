@@ -65,9 +65,6 @@
 		<tr>
 			<!-- 인증을 하지 않았을 때 메뉴 -->
 			<sec:authorize access="!isAuthenticated()">
-				<td class="nav-item"><a href="/user/register" class="nav-link">
-						<spring:message code="header.joinMember" />
-				</a></td>
 
 			</sec:authorize>
 

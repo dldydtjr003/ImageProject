@@ -6,17 +6,15 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <style>
-/* 헤더 전체 컨테이너 */
 .user-header-wrapper {
 	display: flex;
-	justify-content: space-between; /* 양 끝으로 배치 (로고 <-> 인증메뉴) */
+	justify-content: space-between; 
 	align-items: center;
-	padding: 15px 50px; /* 좌우 여백을 넓혀서 안정감 부여 */
+	padding: 15px 50px; 
 	background-color: #ffffff;
 	font-family: 'Pretendard', sans-serif;
 }
 
-/* 왼쪽: 로고 스타일 */
 .header-logo {
 	text-decoration: none;
 	display: flex;
@@ -31,17 +29,15 @@
 }
 
 .header-logo-text span {
-	color: #007aff; /* 로고 포인트 컬러 */
+	color: #007aff;
 }
 
-/* 오른쪽: 링크 및 정보 그룹 */
 .user-nav-group {
 	display: flex;
 	gap: 15px;
 	align-items: center;
 }
 
-/* 일반 링크 스타일 (회원가입, 로그인) */
 .user-nav-link {
 	text-decoration: none;
 	font-size: 14px;
@@ -57,7 +53,6 @@
 	background-color: #f0f7ff;
 }
 
-/* 로그인된 사용자 정보 캡슐 스타일 */
 .user-profile-capsule {
 	display: flex;
 	align-items: center;
@@ -81,7 +76,6 @@
 	margin-left: 2px;
 }
 
-/* 로그아웃 버튼 */
 .logout-btn {
 	text-decoration: none;
 	color: #ff4d4f;
@@ -96,7 +90,6 @@
 	color: #cf1322;
 }
 
-/* 하단 구분선 */
 .header-divider {
 	border: 0;
 	height: 1px;
