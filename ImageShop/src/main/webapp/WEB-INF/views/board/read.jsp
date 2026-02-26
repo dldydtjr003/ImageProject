@@ -135,14 +135,15 @@ button {
 button:active {
 	transform: scale(0.98);
 }
+
 textarea {
 	width: 100%;
-	min-height: 250px; 
+	min-height: 250px;
 	padding: 16px;
 	border: 1px solid #e2e8f0;
 	border-radius: 12px;
 	font-size: 15px;
-	line-height: 1.8; 
+	line-height: 1.8;
 	background-color: #f8fafc;
 	color: #334155;
 	box-sizing: border-box;
@@ -156,6 +157,30 @@ textarea:focus {
 	border-color: #007aff;
 	background-color: #ffffff;
 	box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+}
+
+#btnEdit {
+	background-color: #007aff;
+	color: white;
+}
+
+#btnEdit:hover {
+	background-color: #0063d1;
+	transform: translateY(-1px);
+}
+
+#btnRemove {
+	background-color: #fff1f2;
+	color: #e11d48;
+}
+
+#btnRemove:hover {
+	background-color: #ffe4e6;
+	transform: translateY(-1px);
+}
+
+button:active {
+	transform: scale(0.98);
 }
 </style>
 </head>
@@ -191,29 +216,29 @@ textarea:focus {
 			</form:form>
 
 			<div class="btn-container">
-				<button type="button" id="btnList">
-					<spring:message code="action.list" />
-				</button>
 				<!-- 사용자 정보를 가지고 온다. -->
 				<sec:authentication property="principal" var="principal" />
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<button type="button" id="btnRemove">
-						<spring:message code="action.remove" />
-					</button>
 					<button type="button" id="btnEdit">
 						<spring:message code="action.edit" />
+					</button>
+					<button type="button" id="btnRemove">
+						<spring:message code="action.remove" />
 					</button>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_MEMBER')">
 					<c:if test="${principal.username eq board.writer}">
-						<button type="button" id="btnRemove">
-							<spring:message code="action.remove" />
-						</button>
 						<button type="button" id="btnEdit">
 							<spring:message code="action.edit" />
 						</button>
+						<button type="button" id="btnRemove">
+							<spring:message code="action.remove" />
+						</button>
 					</c:if>
 				</sec:authorize>
+				<button type="button" id="btnList">
+					<spring:message code="action.list" />
+				</button>
 			</div>
 		</div>
 	</div>
@@ -225,14 +250,12 @@ textarea:focus {
 			let formObj = $("#board");
 
 			$("#btnEdit").on("click", function() {
-				formObj.attr("action", "/board/modify");
-				formObj.attr("method", "get");
-				formObj.submit();
+				let boardNo = $("#boardNo")
+				self.location = "/board/modify?boardNo=" + boardNo.val();
 			});
 			$("#btnRemove").on("click", function() {
-				formObj.attr("action", "/board/remove");
-				formObj.attr("method", "get");
-				formObj.submit();
+				let boardNo = $("#boardNo")
+				self.location = "/board/remove?boardNo=" + boardNo.val();
 			});
 			$("#btnList").on("click", function() {
 				self.location = "/board/list";

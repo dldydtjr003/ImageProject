@@ -10,16 +10,30 @@
 
 	<!-- 게시글 목록 페이지 -->
 	<select id="list" resultType="Board"> 
-<![CDATA[   SELECT board_no, title, content, writer, reg_date
-			FROM board 
-			WHERE board_no > 0 
-			ORDER BY board_no DESC, reg_date DESC 
+<![CDATA[   
+		SELECT board_no, title, content, writer, reg_date
+		FROM board 
+		WHERE board_no > 0 
+		ORDER BY board_no DESC, reg_date DESC 
 ]]>
 	</select>
 	<!-- 상세 페이지 -->
 	<select id="read">
 		SELECT board_no, title, content, writer, reg_date
-			FROM board 
-			WHERE board_no = #{boardNo}
+		FROM board
+		WHERE board_no = #{boardNo}
 	</select>
+
+	<!-- 게시글 수정 처리 -->
+	<update id="modify">
+		UPDATE board
+		SET title =#{title}, content =#{content}
+		WHERE board_no = #{boardNo}
+	</update>
+
+	<!-- 게시글 삭제 처리 -->
+	<delete id="remove">
+		DELETE FROM board
+		WHERE board_no = #{boardNo}
+	</delete>
 </mapper>

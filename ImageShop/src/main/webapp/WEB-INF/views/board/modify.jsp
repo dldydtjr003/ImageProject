@@ -4,6 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,6 +135,53 @@ button {
 button:active {
 	transform: scale(0.98);
 }
+
+textarea {
+	width: 100%;
+	min-height: 250px;
+	padding: 16px;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	font-size: 15px;
+	line-height: 1.8;
+	background-color: #f8fafc;
+	color: #334155;
+	box-sizing: border-box;
+	font-family: 'Pretendard', sans-serif;
+	resize: none;
+	outline: none;
+	display: block;
+}
+
+textarea:focus {
+	border-color: #007aff;
+	background-color: #ffffff;
+	box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+}
+
+#btnModify {
+	background-color: #007aff;
+	color: white;
+}
+
+#btnModify:hover {
+	background-color: #0063d1;
+	transform: translateY(-1px);
+}
+
+#btnRemove {
+	background-color: #fff1f2;
+	color: #e11d48;
+}
+
+#btnRemove:hover {
+	background-color: #ffe4e6;
+	transform: translateY(-1px);
+}
+
+button:active {
+	transform: scale(0.98);
+}
 </style>
 </head>
 <body>
@@ -143,73 +191,55 @@ button:active {
 	<div class="register-wrapper">
 		<div class="register-card">
 			<h2>
-				<spring:message code="user.header.modify" />
+				<spring:message code="board.header.modify" />
 			</h2>
 
-			<form:form modelAttribute="member" action="/user/modify2" method="post">
-				<form:hidden path="userNo" />
-				<form:hidden path="userId" />
+			<form:form modelAttribute="board" action="/board/modify"
+				method="post">
+				<form:hidden path="boardNo" />
 				<table>
 					<tr>
-						<td><spring:message code="user.userId" /></td>
-						<td><form:input path="userId" placeholder="아이디" disabled="true"/>
-							<div class="error-msg-cell">
-								<form:errors path="userId" cssClass="error-msg" />
-							</div></td>
+						<td><spring:message code="board.title" /></td>
+						<td><form:input path="title" /></td>
+						<td><font color="red"><form:errors path="title" /></font></td>
 					</tr>
 					<tr>
-						<td><spring:message code="user.userName" /></td>
-						<td><form:input path="userName" placeholder="이름" />
-							<div class="error-msg-cell">
-								<form:errors path="userName" cssClass="error-msg" />
-							</div></td>
+						<td><spring:message code="board.writer" /></td>
+						<td><form:input path="writer" readonly="true" /></td>
+						<td><font color="red"><form:errors path="writer" /></font></td>
 					</tr>
 					<tr>
-						<td><spring:message code="user.job" /></td>
-						<td><form:select path="job" items="${jobList}"
-								itemValue="value" itemLabel="label" />
-							<div class="error-msg-cell">
-								<form:errors path="job" cssClass="error-msg" />
-							</div></td>
-					</tr>
-					<tr>
-						<td><spring:message code="user.auth" /> - 1</td>
-						<td><form:select path="authList[0].auth" disabled="true">
-								<form:option value="" label="=== 선택해 주세요 ===" />
-								<form:option value="ROLE_USER" label="사용자" />
-								<form:option value="ROLE_MEMBER" label="회원" />
-								<form:option value="ROLE_ADMIN" label="관리자" />
-							</form:select></td>
-					</tr>
-					<tr>
-						<td><spring:message code="user.auth" /> - 2</td>
-						<td><form:select path="authList[1].auth" disabled="true">
-								<form:option value="" label="=== 선택해 주세요 ===" />
-								<form:option value="ROLE_USER" label="사용자" />
-								<form:option value="ROLE_MEMBER" label="회원" />
-								<form:option value="ROLE_ADMIN" label="관리자" />
-							</form:select></td>
-					</tr>
-					<tr>
-						<td><spring:message code="user.auth" /> - 3</td>
-						<td><form:select path="authList[2].auth" disabled="true">
-								<form:option value="" label="=== 선택해 주세요 ===" />
-								<form:option value="ROLE_USER" label="사용자" />
-								<form:option value="ROLE_MEMBER" label="회원" />
-								<form:option value="ROLE_ADMIN" label="관리자" />
-							</form:select></td>
+						<td><spring:message code="board.content" /></td>
+						<td><form:textarea path="content" /></td>
+						<td><font color="red"><form:errors path="content" /></font></td>
 					</tr>
 				</table>
 			</form:form>
 
 			<div class="btn-container">
+
+				<!-- 사용자 정보를 가지고 온다. -->
+				<sec:authentication property="principal" var="principal" />
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<button type="button" id="btnList">
-						<spring:message code="action.list" />
+					<button type="button" id="btnModify">
+						<spring:message code="action.modify" />
+					</button>
+					<button type="button" id="btnRemove">
+						<spring:message code="action.remove" />
 					</button>
 				</sec:authorize>
-				<button type="button" id="btnModify">
-					<spring:message code="action.modify" />
+				<sec:authorize access="hasRole('ROLE_MEMBER')">
+					<c:if test="${principal.username eq board.writer}">
+						<button type="button" id="btnModify">
+							<spring:message code="action.modify" />
+						</button>
+						<button type="button" id="btnRemove">
+							<spring:message code="action.remove" />
+						</button>
+					</c:if>
+				</sec:authorize>
+				<button type="button" id="btnList">
+					<spring:message code="action.list" />
 				</button>
 			</div>
 		</div>
@@ -219,14 +249,17 @@ button:active {
 
 	<script>
 		$(document).ready(function() {
-			let formObj = $("#member");
+			let formObj = $("#board");
 
 			$("#btnModify").on("click", function() {
 				formObj.submit();
 			});
-
+			$("#btnRemove").on("click", function() {
+				let boardNo = $("#boardNo")
+				self.location = "/board/remove?boardNo=" + boardNo.val();
+			});
 			$("#btnList").on("click", function() {
-				self.location = "/user/list";
+				self.location = "/board/list";
 			});
 		});
 	</script>
