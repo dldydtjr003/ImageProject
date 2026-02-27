@@ -32,11 +32,13 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
+	@Transactional
 	public int modify(Notice notice) throws Exception {
 		return mapper.modify(notice);
 	}
 
 	@Override
+	@Transactional
 	public int remove(Notice notice) throws Exception {
 		return mapper.remove(notice);
 	}

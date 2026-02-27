@@ -58,8 +58,16 @@ public class NoticeController {
 	// 공지사항 수정 페이지
 	@GetMapping("/modify")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public void modifyForm(Notice notice, Model model) throws Exception {
-		model.addAttribute(service.read(notice));
+	public String modifyForm(Notice notice, Model model) throws Exception {
+
+		Notice readNotice = service.read(notice);
+
+		if (readNotice == null) {
+			return "redirect:/notice/list";
+		}
+		model.addAttribute("notice", readNotice);
+
+		return "notice/modify";
 	}
 
 	// 공지사항 수정 처리
