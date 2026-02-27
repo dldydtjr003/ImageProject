@@ -204,27 +204,27 @@ button:active {
 					</tr>
 					<tr>
 						<td><spring:message code="notice.content" /></td>
-						<td><form:textarea path="content" readonly="true"/></td>
+						<td><form:textarea path="content" readonly="true" /></td>
 						<td><font color="red"><form:errors path="content" /></font></td>
 					</tr>
-					</table>
-					</form:form>
-					<div class="btn-container">
-						<!-- 사용자 정보를 가지고 온다. -->
-						<sec:authentication property="principal" var="principal" />
-						<sec:authorize access="hasRole('ROLE_ADMIN')">
-							<button type="button" id="btnEdit">
-								<spring:message code="action.edit" />
-							</button>
-							<button type="button" id="btnRemove">
-								<spring:message code="action.remove" />
-							</button>
-						</sec:authorize>
+				</table>
+			</form:form>
+			<div class="btn-container">
+				<!-- 사용자 정보를 가지고 온다. -->
+				<sec:authentication property="principal" var="principal" />
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<button type="button" id="btnEdit">
+						<spring:message code="action.edit" />
+					</button>
+					<button type="button" id="btnRemove">
+						<spring:message code="action.remove" />
+					</button>
+				</sec:authorize>
 
-						<button type="button" id="btnList">
-							<spring:message code="action.list" />
-						</button>
-					</div>
+				<button type="button" id="btnList">
+					<spring:message code="action.list" />
+				</button>
+			</div>
 		</div>
 	</div>
 
@@ -235,25 +235,23 @@ button:active {
 				function() {
 					let formObj = $("#notice");
 
-					$("#btnEdit").on(
-							"click",
-							function() {
-								let noticeNo = $("#noticeNo").val();
-								self.location = "/notice/modify?noticeNo" + noticeNo;
-							});
+					$("#btnModify, #btnEdit").on("click", function() {
+						let noticeNo = $("#noticeNo").val(); 
+						self.location = "/notice/modify?noticeNo=" + noticeNo;
+					});
 					$("#btnRemove").on(
 							"click",
 							function() {
 								let noticeNo = $("#noticeNo").val();
 								let page = $("#page").val();
 								let sizePerPage = $("#sizePerPage").val();
-								self.location = "/notice/remove?page="+page+"&sizePerPage="+sizePerPage+"&noticeNo="+noticeNo;
+								self.location = "/notice/remove?page=" + page
+										+ "&sizePerPage=" + sizePerPage
+										+ "&noticeNo=" + noticeNo;
 							});
-					$("#btnList").on(
-							"click",
-							function() {
-								self.location = "/notice/list"
-							});
+					$("#btnList").on("click", function() {
+						self.location = "/notice/list"
+					});
 				});
 	</script>
 </body>

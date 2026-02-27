@@ -195,7 +195,7 @@ button:active {
 			</h2>
 
 			<form:form modelAttribute="notice" action="/notice/modify" method="post">
-				<form:hidden path="noticeNo" />
+				<form:hidden path="noticeNo" id="noticeNo"/>
 				<table>
 					<tr>
 						<td><spring:message code="notice.title" /></td>
@@ -233,8 +233,7 @@ button:active {
 					$("#btnModify").on(
 							"click",
 							function() {
-								let noticeNo = $("#noticeNo").val();
-								self.location = "/notice/modify?noticeNo=" + noticeNo;
+								$("#notice").submit();
 							});
 					$("#btnList").on(
 							"click",
