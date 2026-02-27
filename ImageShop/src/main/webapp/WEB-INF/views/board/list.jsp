@@ -26,7 +26,7 @@ body {
 }
 
 .content-container {
-	max-width: 1000px;
+	max-width: 1100px;
 	margin: 60px auto;
 	padding: 0 20px;
 }
@@ -36,6 +36,8 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 30px;
+	gap: 20px;
+	flex-wrap: wrap;
 }
 
 .list-header h2 {
@@ -43,6 +45,63 @@ body {
 	font-weight: 700;
 	margin: 0;
 	color: #1a1a1a;
+}
+
+.search-form {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	background: #ffffff;
+	padding: 6px 10px;
+	border-radius: 16px;
+	border: 1px solid #eef0f2;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.search-select {
+	border: none;
+	background: #f1f5f9;
+	padding: 10px 12px;
+	border-radius: 10px;
+	font-size: 14px;
+	color: #475569;
+	font-weight: 500;
+	outline: none;
+	cursor: pointer;
+}
+
+.search-input {
+	border: 1px solid #e2e8f0;
+	padding: 10px 16px;
+	border-radius: 10px;
+	font-size: 14px;
+	width: 220px;
+	outline: none;
+	transition: all 0.2s;
+}
+
+.search-input:focus {
+	border-color: #007aff;
+	box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.btn-search {
+	background-color: #1e293b;
+	color: white;
+	border: none;
+	padding: 10px 18px;
+	border-radius: 10px;
+	font-weight: 600;
+	font-size: 14px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	transition: all 0.2s;
+}
+
+.btn-search:hover {
+	background-color: #0f172a;
 }
 
 .btn-register {
@@ -65,7 +124,12 @@ body {
 	transform: translateY(-2px);
 }
 
-.btn-icon {
+.btn-icon-small {
+	width: 16px;
+	height: 16px;
+}
+
+.btn-icon-reg {
 	width: 18px;
 	height: 18px;
 }
@@ -76,7 +140,6 @@ body {
 	overflow: hidden;
 	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
 	border: 1px solid #eef0f2;
-	margin-bottom: 25px;
 }
 
 table {
@@ -91,24 +154,6 @@ thead th {
 	font-weight: 600;
 	color: #64748b;
 	border-bottom: 1px solid #f1f5f9;
-	text-transform: uppercase;
-	text-align: center;
-}
-
-.col-no {
-	width: 80px;
-}
-
-.col-title {
-	text-align: left !important;
-}
-
-.col-writer {
-	width: 150px;
-}
-
-.col-date {
-	width: 180px;
 }
 
 tbody td {
@@ -117,11 +162,27 @@ tbody td {
 	color: #334155;
 	border-bottom: 1px solid #f8fafc;
 	text-align: center;
-	vertical-align: middle;
 }
 
 tbody tr:hover {
 	background-color: #fbfcfe;
+}
+
+.col-no {
+	width: 80px;
+}
+
+.col-writer {
+	width: 120px;
+}
+
+.col-date {
+	width: 160px;
+}
+
+.col-title-cell {
+	text-align: left;
+	padding-left: 40px;
 }
 
 .title-link {
@@ -129,40 +190,53 @@ tbody tr:hover {
 	text-decoration: none;
 	font-weight: 600;
 	transition: color 0.2s;
-	display: inline-block;
 }
 
 .title-link:hover {
 	color: #007aff;
 }
 
-.writer-text {
+.text-muted {
 	color: #64748b;
+	font-size: 14px;
 }
 
-.date-text {
+.text-date {
 	color: #94a3b8;
 	font-size: 14px;
+}
+
+.text-writer {
+	font-weight: 500;
+}
+
+.empty-row-container {
+	padding: 60px 0;
+	text-align: center;
+}
+
+.empty-icon {
+	width: 48px;
+	height: 48px;
+	opacity: 0.3;
+	margin-bottom: 10px;
 }
 
 .pagination-wrapper {
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	padding: 20px 0 40px 0;
+	margin-top: 30px;
 	gap: 6px;
 }
 
 .pagination-wrapper a {
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
 	min-width: 40px;
 	height: 40px;
-	padding: 0 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	text-decoration: none;
 	color: #64748b;
-	font-size: 14px;
 	font-weight: 600;
 	border-radius: 12px;
 	transition: all 0.2s;
@@ -170,27 +244,11 @@ tbody tr:hover {
 
 .pagination-wrapper a:hover {
 	background-color: #e2e8f0;
-	color: #1e293b;
 }
 
 .pagination-wrapper a.active-page {
 	background-color: #007aff;
 	color: white !important;
-	box-shadow: 0 4px 10px rgba(0, 122, 255, 0.25);
-}
-
-/* 5. 빈 목록 상태 */
-.empty-row {
-	text-align: center;
-	padding: 80px 0 !important;
-	color: #94a3b8;
-}
-
-.empty-icon {
-	width: 48px;
-	height: 48px;
-	margin-bottom: 10px;
-	opacity: 0.3;
 }
 </style>
 </head>
@@ -203,9 +261,22 @@ tbody tr:hover {
 			<h2>
 				<spring:message code="board.header.list" />
 			</h2>
+
+			<form:form modelAttribute="pgrq" method="get"
+				action="/board/list${pgrq.toUriStringByPage()}" class="search-form">
+				<form:select path="searchType" items="${searchTypeCodeValueList}"
+					itemValue="value" itemLabel="label" class="search-select" />
+				<form:input path="keyword" class="search-input"
+					placeholder="검색어를 입력하세요..." />
+				<button type="submit" id='searchBtn' class="btn-search">
+					<i data-lucide="search" class="btn-icon-small"></i>
+					<spring:message code="action.search" />
+				</button>
+			</form:form>
+
 			<sec:authorize access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')">
 				<a href="/board/register" class="btn-register"> <i
-					data-lucide="plus-circle" class="btn-icon"></i> <spring:message
+					data-lucide="plus-circle" class="btn-icon-reg"></i> <spring:message
 						code="board.header.register" />
 				</a>
 			</sec:authorize>
@@ -216,8 +287,8 @@ tbody tr:hover {
 				<thead>
 					<tr>
 						<th class="col-no"><spring:message code="board.no" /></th>
-						<th class="col-title"><spring:message code="board.title" /></th>
-						<th class="col-writer"><spring:message code="board.content" /></th>
+						<th><spring:message code="board.title" /></th>
+						<th><spring:message code="board.content" /></th>
 						<th class="col-writer"><spring:message code="board.writer" /></th>
 						<th class="col-date"><spring:message code="board.regdate" /></th>
 					</tr>
@@ -226,8 +297,8 @@ tbody tr:hover {
 					<c:choose>
 						<c:when test="${empty list}">
 							<tr>
-								<td colspan="4" class="empty-row"><i data-lucide="folder-x"
-									class="empty-icon"></i><br> <spring:message
+								<td colspan="5" class="empty-row-container"><i
+									data-lucide="folder-x" class="empty-icon"></i><br> <spring:message
 										code="common.listEmpty" /></td>
 							</tr>
 						</c:when>
@@ -235,12 +306,12 @@ tbody tr:hover {
 							<c:forEach items="${list}" var="board">
 								<tr>
 									<td>${board.boardNo}</td>
-									<td class="col-title"><a
-										href='/board/read${pagination.makeQuery(pagination.pageRequest.page)}&boardNo=${board.boardNo}'
+									<td class="col-title-cell"><a
+										href='/board/read${pgrq.toUriString(pgrq.page)}&boardNo=${board.boardNo}'
 										class="title-link"> ${board.title} </a></td>
-									<td class="writer-text">${board.content}</td>
-									<td class="writer-text">${board.writer}</td>
-									<td class="date-text"><fmt:formatDate
+									<td class="text-muted">${board.content}</td>
+									<td class="text-writer">${board.writer}</td>
+									<td class="text-date"><fmt:formatDate
 											pattern="yyyy-MM-dd HH:mm" value="${board.regDate}" /></td>
 								</tr>
 							</c:forEach>
@@ -251,26 +322,24 @@ tbody tr:hover {
 		</div>
 
 		<div class="pagination-wrapper">
-			<c:if test="${pagination.prev}">
-				<a
-					href="/board/list${pagination.makeQuery(pagination.startPage - 1)}">&laquo;</a>
-			</c:if>
-
-			<c:forEach begin="${pagination.startPage}"
-				end="${pagination.endPage}" var="idx">
-				<c:choose>
-					<c:when test="${pagination.pageRequest.page eq idx}">
-						<a href="/board/list${pagination.makeQuery(idx)}"
-							class="active-page">${idx}</a>
-					</c:when>
-					<c:otherwise>
+			<c:if test="${empty pgrq.keyword}">
+				<c:if test="${pagination.prev}">
+					<!-- ?page=3&sizePerPage=10" -->
+					<a
+						href="/board/list${pagination.makeQuery(pagination.startPage - 1)}">&laquo;</a>
+				</c:if>
+				<c:forEach begin="${pagination.startPage }"
+					end="${pagination.endPage }" var="idx">
+					<c:if test="${pagination.pageRequest.page eq idx}">
+						<a href="/board/list${pagination.makeQuery(idx)}">[${idx}]</a>
+					</c:if>
+					<c:if test="${!(pagination.pageRequest.page eq idx)}">
 						<a href="/board/list${pagination.makeQuery(idx)}">${idx}</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-
-			<c:if test="${pagination.next && pagination.endPage > 0}">
-				<a href="/board/list${pagination.makeQuery(pagination.endPage + 1)}">&raquo;</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${pagination.next && pagination.endPage > 0}">
+					<a href="/board/list${pagination.makeQuery(pagination.endPage +1)}">&raquo;</a>
+				</c:if>
 			</c:if>
 		</div>
 	</div>
@@ -279,7 +348,8 @@ tbody tr:hover {
 
 	<script>
 		$(document).ready(function() {
-			lucide.createIcons();
+			lucide.createIcons(); // Lucide 아이콘 활성화
+
 			var result = "${msg}";
 			if (result === "SUCCESS") {
 				alert("<spring:message code='common.processSuccess' />");

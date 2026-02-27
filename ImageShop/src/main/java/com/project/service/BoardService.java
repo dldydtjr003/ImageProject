@@ -19,6 +19,8 @@ public interface BoardService {
 
 	public int remove(Board board) throws Exception;
 
-	public int count() throws Exception;
+	public int count(PageRequest pageRequest) throws Exception;
+
+	//public int count() throws Exception;
 
 }
