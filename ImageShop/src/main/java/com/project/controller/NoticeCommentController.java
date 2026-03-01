@@ -25,14 +25,9 @@ public class NoticeCommentController {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
 	public String register(NoticeComment comment, RedirectAttributes rttr, Authentication auth) throws Exception {
 
-		// 💡 1. 로그인한 사용자의 아이디를 가져와서 객체에 설정!
 		if (auth != null) {
 			comment.setUserId(auth.getName());
 		}
-
-		log.info("디버깅 - boardNo: " + comment.getBoardNo());
-		log.info("디버깅 - userNo: " + comment.getUserNo()); // 이것도 확인
-		log.info("댓글 등록 시도! comment: " + comment);
 
 		service.register(comment);
 

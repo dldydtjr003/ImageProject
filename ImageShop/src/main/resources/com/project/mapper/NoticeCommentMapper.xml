@@ -3,22 +3,38 @@
 <mapper namespace="com.project.mapper.NoticeCommentMapper">
 
 	<insert id="register">
-        INSERT INTO Notice_comment (
-            comment_no,
-            board_no, 
-            user_no,
-            user_id,
-            content,
-            reg_date
-        )
-        VALUES (
-            Notice_comment_seq.NEXTVAL,
-            #{boardNo}, 
-            #{userNo},
-            #{userId},
-            #{content},
-            SYSDATE
-        )
-    </insert>
+		INSERT INTO Notice_comment (
+		comment_no,
+		board_no,
+		user_no,
+		user_id,
+		content,
+		reg_date
+		)
+		VALUES (
+		Notice_comment_seq.NEXTVAL,
+		#{boardNo},
+		#{userNo},
+		#{userId},
+		#{content},
+		SYSDATE
+		)
+	</insert>
+
+	<select id="list" resultType="NoticeComment">
+		SELECT
+		comment_no,
+		board_no,
+		user_no,
+		user_id,
+		content,
+		reg_date
+		FROM
+		notice_comment
+		WHERE
+		board_no = #{boardNo}
+		ORDER BY
+		comment_no DESC
+	</select>
 
 </mapper>

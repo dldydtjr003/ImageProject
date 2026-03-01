@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.domain.Notice;
+import com.project.service.NoticeCommentService;
 import com.project.service.NoticeService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,9 @@ public class NoticeController {
 	@Autowired
 	private NoticeService service;
 
+	@Autowired
+	private NoticeCommentService commentService;
+	
 	// 공지사항 등록 페이지
 	@GetMapping("/register")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -58,6 +62,7 @@ public class NoticeController {
 			log.error("공지사항을 찾을 수 없습니다. 번호: " + notice.getNoticeNo());
 			return "redirect:/notice/list";
 		}
+		model.addAttribute("commentList", commentService.list(notice.getNoticeNo()));
 
 		model.addAttribute("notice", dbNotice);
 		return "notice/read";

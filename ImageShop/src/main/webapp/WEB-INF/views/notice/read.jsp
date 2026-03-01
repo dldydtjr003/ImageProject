@@ -239,6 +239,42 @@ button:active {
 			<button type="button" id="btnRegister">댓글 등록</button>
 		</form>
 	</div>
+	<div class="register-card" style="margin-top: 20px;">
+		<h3 style="margin-bottom: 20px; font-size: 20px; font-weight: 600;">댓글
+			목록</h3>
+		<hr
+			style="border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 20px;">
+
+		<c:choose>
+			<%-- 댓글이 없는 경우 --%>
+			<c:when test="${empty commentList}">
+				<div
+					style="text-align: center; color: #64748b; padding: 40px 0; font-size: 15px;">
+					등록된 댓글이 없습니다.</div>
+			</c:when>
+
+			<%-- 댓글이 있는 경우 --%>
+			<c:otherwise>
+				<div class="comment-list">
+					<c:forEach var="comment" items="${commentList}">
+						<div class="comment-item"
+							style="padding: 18px 0; border-bottom: 1px solid #f1f5f9;">
+							<div
+								style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+								<div style="font-size: 15px; font-weight: 600; color: #0f172a;">
+									${comment.userId}</div>
+								<div style="font-size: 13px; color: #94a3b8;">
+									${comment.regDate}</div>
+							</div>
+							<div
+								style="font-size: 15px; color: #334155; line-height: 1.6; white-space: pre-wrap;">
+								${comment.content}</div>
+						</div>
+					</c:forEach>
+				</div>
+			</c:otherwise>
+		</c:choose>
+	</div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
