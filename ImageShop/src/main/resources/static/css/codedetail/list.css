@@ -1,0 +1,150 @@
+body {
+	background-color: #f5f7fa;
+	font-family: 'Pretendard', sans-serif;
+	margin: 0;
+	color: #333;
+}
+
+.content-container {
+	max-width: 1100px;
+	margin: 50px auto;
+	padding: 0 20px;
+}
+
+.list-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.list-header h2 {
+	font-size: 26px;
+	font-weight: 700;
+	margin: 0;
+	color: #1a1a1a;
+}
+
+.btn-register {
+	background-color: #007aff;
+	color: white !important;
+	text-decoration: none;
+	padding: 12px 24px;
+	border-radius: 12px;
+	font-weight: 600;
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	transition: all 0.2s ease;
+	border: none;
+	cursor: pointer;
+}
+
+.btn-register:hover {
+	background-color: #0063d1;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
+}
+
+.btn-icon {
+	width: 18px;
+	height: 18px;
+}
+
+.table-card {
+	background: #ffffff;
+	border-radius: 20px;
+	overflow: hidden;
+	border: 1px solid #e1e4e8;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+thead th {
+	background-color: #f9fbff;
+	padding: 20px 24px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #5e6e82;
+	border-bottom: 1px solid #edf2f9;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+tbody td {
+	padding: 18px 24px;
+	font-size: 15px;
+	color: #333;
+	border-bottom: 1px solid #f2f4f6;
+	vertical-align: middle;
+}
+
+tbody tr:hover {
+	background-color: #f8fbff;
+	cursor: pointer;
+}
+
+.col-group {
+	width: 150px;
+}
+
+.col-value {
+	width: 150px;
+}
+
+.col-name {
+	width: auto;
+}
+
+.col-sort {
+	width: 100px;
+	text-align: center;
+}
+
+.col-date {
+	width: 180px;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.code-badge {
+	background-color: #f0f2f5;
+	padding: 5px 12px;
+	border-radius: 8px;
+	font-family: 'Consolas', monospace;
+	font-weight: 600;
+	color: #4b5563;
+	font-size: 13px;
+}
+
+.name-link {
+	color: #007aff;
+	text-decoration: none;
+	font-weight: 600;
+	transition: color 0.2s;
+}
+
+.name-link:hover {
+	color: #0056b3;
+	text-decoration: underline;
+}
+
+.date-text {
+	color: #8b95a1;
+	font-size: 14px;
+}
+
+.empty-row {
+	text-align: center;
+	padding: 80px 0 !important;
+	color: #abb5c2;
+	font-weight: 500;
+}

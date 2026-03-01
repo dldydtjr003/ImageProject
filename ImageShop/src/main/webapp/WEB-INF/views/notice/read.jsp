@@ -9,315 +9,120 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Image Shop | Join</title>
+<title>Image Shop | Notice Read</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="<spring:url value='/css/notice/read.css'/>">
 
-<style>
-body {
-	background-color: #f5f7fa;
-	font-family: 'Pretendard', sans-serif;
-	margin: 0;
-	color: #333;
-}
-
-.register-wrapper {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 80vh;
-	padding: 40px 20px;
-}
-
-.register-card {
-	background: #ffffff;
-	width: 100%;
-	max-width: 600px;
-	padding: 45px;
-	border-radius: 24px;
-	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-}
-
-h2 {
-	font-size: 26px;
-	font-weight: 700;
-	color: #1a1a1a;
-	margin-bottom: 35px;
-	text-align: center;
-}
-
-table {
-	width: 100%;
-	border-collapse: separate;
-	border-spacing: 0 15px;
-}
-
-tr {
-	display: table-row;
-}
-
-td:first-child {
-	width: 120px;
-	font-size: 14px;
-	font-weight: 600;
-	color: #64748b;
-	vertical-align: middle;
-	padding-right: 15px;
-}
-
-input[type="text"], input[type="password"], select {
-	width: 100%;
-	padding: 13px 16px;
-	border: 1px solid #e2e8f0;
-	border-radius: 12px;
-	font-size: 15px;
-	background-color: #f8fafc;
-	color: #334155;
-	box-sizing: border-box;
-	transition: all 0.2s ease-in-out;
-}
-
-input:focus, select:focus {
-	outline: none;
-	border-color: #007aff;
-	background-color: #fff;
-	box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
-}
-
-.error-msg-cell {
-	padding-top: 4px;
-	display: block;
-}
-
-.error-msg {
-	font-size: 12px;
-	color: #e11d48;
-	font-weight: 500;
-}
-
-.btn-container {
-	display: flex;
-	gap: 12px;
-	margin-top: 35px;
-}
-
-button {
-	flex: 1;
-	height: 52px;
-	border-radius: 14px;
-	font-size: 15px;
-	font-weight: 600;
-	cursor: pointer;
-	transition: all 0.2s;
-	border: none;
-}
-
-#btnRegister {
-	background-color: #007aff;
-	color: white;
-}
-
-#btnRegister:hover {
-	background-color: #0063d1;
-	transform: translateY(-1px);
-}
-
-#btnList {
-	background-color: #f1f5f9;
-	color: #475569;
-}
-
-#btnList:hover {
-	background-color: #e2e8f0;
-}
-
-button:active {
-	transform: scale(0.98);
-}
-
-textarea {
-	width: 100%;
-	min-height: 250px;
-	padding: 16px;
-	border: 1px solid #e2e8f0;
-	border-radius: 12px;
-	font-size: 15px;
-	line-height: 1.8;
-	background-color: #f8fafc;
-	color: #334155;
-	box-sizing: border-box;
-	font-family: 'Pretendard', sans-serif;
-	resize: none;
-	outline: none;
-	display: block;
-}
-
-textarea:focus {
-	border-color: #007aff;
-	background-color: #ffffff;
-	box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
-}
-
-#btnEdit {
-	background-color: #007aff;
-	color: white;
-}
-
-#btnEdit:hover {
-	background-color: #0063d1;
-	transform: translateY(-1px);
-}
-
-#btnRemove {
-	background-color: #fff1f2;
-	color: #e11d48;
-}
-
-#btnRemove:hover {
-	background-color: #ffe4e6;
-	transform: translateY(-1px);
-}
-
-button:active {
-	transform: scale(0.98);
-}
-</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<jsp:include page="/WEB-INF/views/common/menu.jsp" />
 
-	<div class="register-wrapper">
-		<div class="register-card">
-			<h2>
-				<spring:message code="notice.header.read" />
-			</h2>
+	<div class="page-container">
+		<div class="content-wrapper">
 
-			<form:form modelAttribute="notice">
-				<form:hidden path="noticeNo" />
+			<div class="card">
+				<div class="card-header">
+					<spring:message code="notice.header.read" />
+				</div>
 
-				<table>
-					<tr>
-						<td><spring:message code="notice.title" /></td>
-						<td><form:input path="title" readonly="true" /></td>
-						<td><font color="red"><form:errors path="title" /></font></td>
-					</tr>
-					<tr>
-						<td><spring:message code="notice.content" /></td>
-						<td><form:textarea path="content" readonly="true" /></td>
-						<td><font color="red"><form:errors path="content" /></font></td>
-					</tr>
-				</table>
-			</form:form>
+				<form:form modelAttribute="notice">
+					<form:hidden path="noticeNo" />
 
-			<div class="btn-container">
-				<!-- 사용자 정보를 가지고 온다. -->
-				<sec:authentication property="principal" var="principal" />
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<button type="button" id="btnEdit">
-						<spring:message code="action.edit" />
-					</button>
-					<button type="button" id="btnRemove">
-						<spring:message code="action.remove" />
-					</button>
-				</sec:authorize>
+					<table>
+						<tr>
+							<td><spring:message code="notice.title" /></td>
+							<td><form:input path="title" readonly="true" /></td>
+						</tr>
+						<tr>
+							<td><spring:message code="notice.content" /></td>
+							<td><form:textarea path="content" readonly="true" /></td>
+						</tr>
+					</table>
+				</form:form>
 
-				<button type="button" id="btnList">
-					<spring:message code="action.list" />
-				</button>
+				<div class="btn-group">
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<button type="button" id="btnEdit">수정</button>
+						<button type="button" id="btnRemove">삭제</button>
+					</sec:authorize>
+					<button type="button" id="btnList">목록</button>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="comment-section-title">댓글 목록</div>
+
+				<form id="commentForm" action="/comment/register" method="post">
+					<input type="hidden" name="boardNo" value="${notice.noticeNo}">
+					<input type="hidden" id="userNo" name="userNo" value="1">
+
+					<div class="comment-input-area">
+						<textarea id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
+						<button type="button" id="btnRegister">등록</button>
+						<div style="clear: both;"></div>
+					</div>
+				</form>
+
+				<div class="comment-list">
+					<c:choose>
+						<c:when test="${empty commentList}">
+							<div style="text-align: center; color: #94a3b8; padding: 30px 0;">등록된
+								댓글이 없습니다.</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="comment" items="${commentList}">
+								<div class="comment-item">
+									<div class="comment-info">
+										<span class="comment-user">${comment.userId}</span> <span>${comment.regDate}</span>
+									</div>
+									<div class="comment-content">${comment.content}</div>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</div>
-		<form id="commentForm" action="/comment/register" method="post">
-			<input type="hidden" name="boardNo" value="${notice.noticeNo}">
-
-			<input type="hidden" id="userNo" name="userNo" value="1">
-
-			<textarea id="content" name="content" rows="3"
-				placeholder="댓글을 입력하세요"></textarea>
-
-			<button type="button" id="btnRegister">댓글 등록</button>
-		</form>
-	</div>
-	<div class="register-card" style="margin-top: 20px;">
-		<h3 style="margin-bottom: 20px; font-size: 20px; font-weight: 600;">댓글
-			목록</h3>
-		<hr
-			style="border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 20px;">
-
-		<c:choose>
-			<%-- 댓글이 없는 경우 --%>
-			<c:when test="${empty commentList}">
-				<div
-					style="text-align: center; color: #64748b; padding: 40px 0; font-size: 15px;">
-					등록된 댓글이 없습니다.</div>
-			</c:when>
-
-			<%-- 댓글이 있는 경우 --%>
-			<c:otherwise>
-				<div class="comment-list">
-					<c:forEach var="comment" items="${commentList}">
-						<div class="comment-item"
-							style="padding: 18px 0; border-bottom: 1px solid #f1f5f9;">
-							<div
-								style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-								<div style="font-size: 15px; font-weight: 600; color: #0f172a;">
-									${comment.userId}</div>
-								<div style="font-size: 13px; color: #94a3b8;">
-									${comment.regDate}</div>
-							</div>
-							<div
-								style="font-size: 15px; color: #334155; line-height: 1.6; white-space: pre-wrap;">
-								${comment.content}</div>
-						</div>
-					</c:forEach>
-				</div>
-			</c:otherwise>
-		</c:choose>
 	</div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	<script>
-		$(document).ready(
-				function() {
-					let formObj = $("#notice");
+		$(document).ready(function() {
+			// 버튼 클릭 이벤트
+			$("#btnEdit").on("click", function() {
+				let noticeNo = $("#noticeNo").val();
+				self.location = "/notice/modify?noticeNo=" + noticeNo;
+			});
 
-					$("#btnModify, #btnEdit").on("click", function() {
-						let noticeNo = $("#noticeNo").val();
-						self.location = "/notice/modify?noticeNo=" + noticeNo;
-					});
-					$("#btnRemove").on(
-							"click",
-							function() {
-								let noticeNo = $("#noticeNo").val();
-								let page = $("#page").val();
-								let sizePerPage = $("#sizePerPage").val();
-								self.location = "/notice/remove?page=" + page
-										+ "&sizePerPage=" + sizePerPage
-										+ "&noticeNo=" + noticeNo;
-							});
-					$("#btnList").on("click", function() {
-						self.location = "/notice/list"
-					});
-					$("#btnRegister").on("click", function() {
-						const userNo = $("#userNo").val();
-						const content = $("#content").val();
+			$("#btnRemove").on("click", function() {
+				let noticeNo = $("#noticeNo").val();
+				if (confirm("정말로 삭제하시겠습니까?")) {
+					self.location = "/notice/remove?noticeNo=" + noticeNo;
+				}
+			});
 
-						if (!userNo || userNo === "") {
-							alert("로그인 후 댓글을 작성할 수 있습니다.");
-							return;
-						}
+			$("#btnList").on("click", function() {
+				self.location = "/notice/list"
+			});
 
-						if (!content || content.trim() === "") {
-							alert("댓글 내용을 입력해주세요.");
-							return;
-						}
+			// 댓글 등록
+			$("#btnRegister").on("click", function() {
+				const userNo = $("#userNo").val();
+				const content = $("#content").val();
 
-						// 폼 제출
-						$("#commentForm").submit();
-					});
-				});
+				if (!userNo || userNo === "") {
+					alert("로그인 후 댓글을 작성할 수 있습니다.");
+					return;
+				}
+				if (!content || content.trim() === "") {
+					alert("댓글 내용을 입력해주세요.");
+					return;
+				}
+				$("#commentForm").submit();
+			});
+		});
 	</script>
 </body>
 </html>
