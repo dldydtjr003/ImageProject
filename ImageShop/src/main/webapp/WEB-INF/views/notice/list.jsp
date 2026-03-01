@@ -307,6 +307,7 @@ tbody tr:hover {
 				</tbody>
 			</table>
 		</div>
+		
 		<!-- 페이징 네비게이션 추가 -->
 	</div>
 

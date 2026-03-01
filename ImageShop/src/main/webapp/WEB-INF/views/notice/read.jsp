@@ -196,6 +196,7 @@ button:active {
 
 			<form:form modelAttribute="notice">
 				<form:hidden path="noticeNo" />
+
 				<table>
 					<tr>
 						<td><spring:message code="notice.title" /></td>
@@ -209,6 +210,7 @@ button:active {
 					</tr>
 				</table>
 			</form:form>
+
 			<div class="btn-container">
 				<!-- 사용자 정보를 가지고 온다. -->
 				<sec:authentication property="principal" var="principal" />
@@ -226,6 +228,16 @@ button:active {
 				</button>
 			</div>
 		</div>
+		<form id="commentForm" action="/comment/register" method="post">
+			<input type="hidden" name="boardNo" value="${notice.noticeNo}">
+
+			<input type="hidden" id="userNo" name="userNo" value="1">
+
+			<textarea id="content" name="content" rows="3"
+				placeholder="댓글을 입력하세요"></textarea>
+
+			<button type="button" id="btnRegister">댓글 등록</button>
+		</form>
 	</div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -236,7 +248,7 @@ button:active {
 					let formObj = $("#notice");
 
 					$("#btnModify, #btnEdit").on("click", function() {
-						let noticeNo = $("#noticeNo").val(); 
+						let noticeNo = $("#noticeNo").val();
 						self.location = "/notice/modify?noticeNo=" + noticeNo;
 					});
 					$("#btnRemove").on(
@@ -251,6 +263,23 @@ button:active {
 							});
 					$("#btnList").on("click", function() {
 						self.location = "/notice/list"
+					});
+					$("#btnRegister").on("click", function() {
+						const userNo = $("#userNo").val();
+						const content = $("#content").val();
+
+						if (!userNo || userNo === "") {
+							alert("로그인 후 댓글을 작성할 수 있습니다.");
+							return;
+						}
+
+						if (!content || content.trim() === "") {
+							alert("댓글 내용을 입력해주세요.");
+							return;
+						}
+
+						// 폼 제출
+						$("#commentForm").submit();
 					});
 				});
 	</script>

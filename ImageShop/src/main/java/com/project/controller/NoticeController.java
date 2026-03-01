@@ -49,10 +49,18 @@ public class NoticeController {
 		model.addAttribute("list", service.list());
 	}
 
-	// 공지사항 상세 페이지
 	@GetMapping("/read")
-	public void read(Notice notice, Model model) throws Exception {
-		model.addAttribute(service.read(notice));
+	public String read(Notice notice, Model model) throws Exception {
+		// 💡 notice.getNoticeNo() 값이 제대로 들어있는지 확인!
+		Notice dbNotice = service.read(notice);
+
+		if (dbNotice == null) {
+			log.error("공지사항을 찾을 수 없습니다. 번호: " + notice.getNoticeNo());
+			return "redirect:/notice/list";
+		}
+
+		model.addAttribute("notice", dbNotice);
+		return "notice/read";
 	}
 
 	// 공지사항 수정 페이지
