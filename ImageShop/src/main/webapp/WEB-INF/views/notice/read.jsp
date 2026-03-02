@@ -55,7 +55,8 @@
 
 				<form id="commentForm" action="/comment/register" method="post">
 					<input type="hidden" name="boardNo" value="${notice.noticeNo}">
-					<input type="hidden" id="userNo" name="userNo" value="1">
+					<input type="hidden" id="userNo" name="userNo" value="1"> <input
+						type="hidden" name="commentNo" value="${comment.commentNo}">
 
 					<div class="comment-input-area">
 						<textarea id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
@@ -72,11 +73,41 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="comment" items="${commentList}">
-								<div class="comment-item">
+								<div class="comment-item" id="comment_${comment.commentNo}">
 									<div class="comment-info">
 										<span class="comment-user">${comment.userId}</span> <span>${comment.regDate}</span>
+
+										<sec:authorize access="isAuthenticated()">
+											<c:set var="loginId">
+												<sec:authentication property="principal.username" />
+											</c:set>
+											<c:if test="${loginId eq comment.userId}">
+												<div class="comment-actions"
+													style="display: inline; margin-left: 10px;">
+													<a href="javascript:void(0)"
+														onclick="showEditForm('${comment.commentNo}', '${comment.content}')"
+														style="font-size: 12px; color: #3b82f6;">수정</a> <a
+														href="javascript:void(0)"
+														onclick="deleteComment('${comment.commentNo}')"
+														style="font-size: 12px; color: #ef4444; margin-left: 5px;">삭제</a>
+												</div>
+											</c:if>
+										</sec:authorize>
 									</div>
-									<div class="comment-content">${comment.content}</div>
+
+									<div class="comment-content" id="content_${comment.commentNo}">${comment.content}</div>
+
+									<div class="edit-area" id="edit_area_${comment.commentNo}"
+										style="display: none; margin-top: 10px;">
+										<textarea id="edit_input_${comment.commentNo}"
+											style="width: 100%; border: 1px solid #ddd;">${comment.content}</textarea>
+										<div style="text-align: right; margin-top: 5px;">
+											<button type="button"
+												onclick="updateComment('${comment.commentNo}')">완료</button>
+											<button type="button"
+												onclick="hideEditForm('${comment.commentNo}')">취소</button>
+										</div>
+									</div>
 								</div>
 							</c:forEach>
 						</c:otherwise>
@@ -122,7 +153,81 @@
 				}
 				$("#commentForm").submit();
 			});
+
 		});
+		function showEditForm(no, content) {
+			$(".edit-area").hide();
+			$(".comment-content").show();
+
+			$("#content_" + no).hide();
+			$("#edit_area_" + no).show();
+		}
+
+		function hideEditForm(no) {
+			$("#content_" + no).show();
+			$("#edit_area_" + no).hide();
+		}
+
+		function updateComment(no) {
+			const newContent = $("#edit_input_" + no).val();
+
+			if (!newContent.trim()) {
+				alert("내용을 입력해주세요.");
+				return;
+			}
+
+			if (confirm("댓글을 수정하시겠습니까?")) {
+				const form = $('<form></form>');
+				form.attr("method", "post");
+				form.attr("action", "/comment/update");
+
+				form.append($('<input/>', {
+					type : 'hidden',
+					name : 'commentNo',
+					value : no
+				}));
+				form.append($('<input/>', {
+					type : 'hidden',
+					name : 'content',
+					value : newContent
+				}));
+				form.append($('<input/>', {
+					type : 'hidden',
+					name : 'noticeNo',
+					value : '${notice.noticeNo}'
+				}));
+				form.append($('<input/>', {
+					type : 'hidden',
+					name : 'boardNo',
+					value : '${notice.noticeNo}'
+				}));
+
+				form.appendTo('body');
+				form.submit();
+			}
+		}
+			function deleteComment(no) {
+				if (confirm("댓글을 삭제하시겠습니까?")) {
+					const form = $('<form></form>');
+					form.attr("method", "post");
+					form.attr("action", "/comment/delete");
+
+					form.append($('<input/>', {
+						type : 'hidden',
+						name : 'commentNo',
+						value : no
+					}));
+
+					form.append($('<input/>', {
+						type : 'hidden',
+						name : 'boardNo',
+						value : '${notice.noticeNo}'
+					}));
+
+					form.appendTo('body');
+					form.submit();
+				}
+			}
 	</script>
 </body>
 </html>

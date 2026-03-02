@@ -37,4 +37,16 @@
 		comment_no DESC
 	</select>
 
+	<update id="update">
+		UPDATE notice_comment
+		SET content = #{content}
+		WHERE comment_no = #{commentNo}
+		AND user_id = #{userId}
+	</update>
+	
+	<delete id="delete">
+    DELETE FROM notice_comment
+    WHERE comment_no = #{commentNo}
+    AND user_id = #{userId}
+</delete>
 </mapper>

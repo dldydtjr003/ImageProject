@@ -13,4 +13,8 @@ public interface NoticeCommentMapper {
 
 	public List<Notice> list(int boardNo) throws Exception;
 
+	public int update(NoticeComment comment) throws Exception;
+
+	public int delete(NoticeComment comment) throws Exception;
+
 }

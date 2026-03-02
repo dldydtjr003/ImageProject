@@ -32,5 +32,17 @@ public class NoticeCommentServiceImpl implements NoticeCommentService {
 	public List<Notice> list(int boardNo) throws Exception {
 		return mapper.list(boardNo);
 	}
+
+
+	@Override
+	public int update(NoticeComment comment) throws Exception {
+		return mapper.update(comment);
+	}
+
+
+	@Override
+	public int delete(NoticeComment comment) throws Exception {
+		return mapper.delete(comment);
+	}
 	
 }
