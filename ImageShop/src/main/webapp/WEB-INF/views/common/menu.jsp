@@ -14,8 +14,11 @@
 						<spring:message code="board.header.list" />
 				</a></td>
 				<!-- 공지사항을 메뉴에 추가한다. -->
-				<td class="nav-link"><a href="/notice/list" class="nav-link"><spring:message
+				<td class="nav-item"><a href="/notice/list" class="nav-link"><spring:message
 							code="menu.notice.member" /></a></td>
+				<!-- 상품 관리를 메뉴에 추가한다. -->
+				<td class="nav-item"><a href="/item/list" class="nav-link"><spring:message
+							code="menu.item.member" /></a></td>
 			</sec:authorize>
 
 			<!-- 인증을 했을 때 메뉴 (인가: 관리자, 회원, 매니저) -->
@@ -50,6 +53,9 @@
 					<!-- 공지사항을 메뉴에 추가한다. -->
 					<td class="nav-item"><a href="/notice/list" class="nav-link"><spring:message
 								code="menu.notice.member" /></a></td>
+					<!-- 상품 관리를 메뉴에 추가한다. -->
+					<td class="nav-item"><a href="/item/list" class="nav-link"><spring:message
+								code="menu.item.member" /></a></td>
 				</sec:authorize>
 			</sec:authorize>
 

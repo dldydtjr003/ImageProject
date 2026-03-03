@@ -4,14 +4,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Image Shop | Join</title>
+<title>Image Shop | Register Board</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="<spring:url value='/css/item/read.css'/>">
+<link rel="stylesheet" href="<spring:url value='/css/item/modify.css'/>">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -20,56 +19,40 @@
 	<div class="register-wrapper">
 		<div class="register-card">
 			<h2>
-				<spring:message code="board.header.read" />
+				<spring:message code="item.header.read" />
 			</h2>
 
-			<form:form modelAttribute="board">
-				<form:hidden path="boardNo" />
-				<!-- 현재 페이지 번호와 페이징 크기를 숨겨진 필드 요소를 사용하여 전달한다. -->
-				<input type="hidden" id="page" name="page" value="${pgrq.page}">
-				<input type="hidden" id="sizePerPage" name="sizePerPage"
-					value="${pgrq.sizePerPage}">
+			<form:form modelAttribute="item">
+				<form:hidden path="itemId" />
 				<table>
 					<tr>
-						<td><spring:message code="board.title" /></td>
-						<td><form:input path="title" readonly="true" /></td>
-						<td><font color="red"><form:errors path="title" /></font></td>
+						<td><spring:message code="item.itemName" /></td>
+						<td><form:input path="itemName" readonly="true"/></td>
+						<td><font color="red"><form:errors path="itemName" /></font></td>
 					</tr>
 					<tr>
-						<td><spring:message code="board.writer" /></td>
-						<td><form:input path="writer" readonly="true" /></td>
-						<td><font color="red"><form:errors path="writer" /></font></td>
+						<td><spring:message code="item.itemPrice" /></td>
+						<td><form:input path="price" readonly="true"/>&nbsp;원</td>
+						<td><font color="red"><form:errors path="price" /></font></td>
 					</tr>
 					<tr>
-						<td><spring:message code="board.content" /></td>
-						<td><form:textarea path="content" readonly="true" /></td>
-						<td><font color="red"><form:errors path="content" /></font></td>
+						<td><spring:message code="item.picture" /></td>
+						<td><img src="/item/picture?itemId=${item.itemId}" width="210"></td>
+					</tr>
+					<tr>
+						<td><spring:message code="item.preview" /></td>
+						<td><img src="/item/display?itemId=${item.itemId}" width="210"></td>
+					</tr>
+					<tr>
+						<td><spring:message code="item.itemDescription" /></td>
+						<td><form:textarea path="description"  readonly="true"/></td>
+						<td><form:errors path="description" /></td>
 					</tr>
 				</table>
 			</form:form>
 
 			<div class="btn-container">
-				<!-- 사용자 정보를 가지고 온다. -->
-				<sec:authentication property="principal" var="principal" />
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<button type="button" id="btnEdit">
-						<spring:message code="action.edit" />
-					</button>
-					<button type="button" id="btnRemove">
-						<spring:message code="action.remove" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_MEMBER')">
-					<c:if test="${principal.username eq board.writer}">
-						<button type="button" id="btnEdit">
-							<spring:message code="action.edit" />
-						</button>
-						<button type="button" id="btnRemove">
-							<spring:message code="action.remove" />
-						</button>
-					</c:if>
-				</sec:authorize>
-				<button type="button" id="btnList">
+				<button type="submit" id="btnList">
 					<spring:message code="action.list" />
 				</button>
 			</div>
@@ -79,28 +62,12 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	<script>
-		$(document).ready(
-				function() {
-					let formObj = $("#board");
-
-					$("#btnEdit").on("click",function() {
-								let boardNo = $("#boardNo").val();
-								let page = $("#page").val();
-								let sizePerPage = $("#sizePerPage").val();
-								self.location = "/board/modify?page="+page+"&sizePerPage="+sizePerPage+"&boardNo="+boardNo;
-							});
-					$("#btnRemove").on("click",function() {
-								let boardNo = $("#boardNo").val();
-								let page = $("#page").val();
-								let sizePerPage = $("#sizePerPage").val();
-								self.location = "/board/remove?page="+page+"&sizePerPage="+sizePerPage+"&boardNo="+boardNo;
-							});
-					$("#btnList").on("click", function() {
-						let page = $("#page").val();
-						let sizePerPage = $("#sizePerPage").val();
-						self.location = "/board/list?page="+page+"&sizePerPage="+sizePerPage;
-					});
-				});
+		$(document).ready(function() {
+			let formObj = $("#item");
+			$("#btnList").on("click", function() {
+				self.location = "/item/list";
+			});
+		});
 	</script>
 </body>
 </html>

@@ -108,7 +108,9 @@ public class ItemController {
 			e.printStackTrace();
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
 		} finally {
-			in.close();
+			if (in != null) { // 반드시 null 체크를 해야 합니다.
+				in.close();
+			}
 		}
 		// 웹 브라우저에게 바이트 단위로 이미지를 전송
 		return entity;
@@ -155,7 +157,9 @@ public class ItemController {
 			e.printStackTrace();
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
 		} finally {
-			in.close();
+			if (in != null) { // 반드시 null 체크를 해야 합니다.
+				in.close();
+			}
 		}
 		return entity;
 	}
@@ -189,7 +193,7 @@ public class ItemController {
 			// 기존의 이지지파일 삭제
 			Item item2 = itemService.read(item);
 			String pictureUrl = item2.getPictureUrl();
-			File pictureFile_ = new File(uploadPath , pictureUrl);
+			File pictureFile_ = new File(uploadPath, pictureUrl);
 			pictureFile_.delete();
 
 			item.setPictureUrl(createdFilename);
@@ -201,7 +205,7 @@ public class ItemController {
 			// 기존의 프리뷰 파일 삭제
 			Item item2 = itemService.read(item);
 			String previewUrl = item2.getPreviewUrl();
-			File previewFile_ = new File(uploadPath , previewUrl);
+			File previewFile_ = new File(uploadPath, previewUrl);
 			previewFile_.delete();
 
 			item.setPreviewUrl(createdFilename);
@@ -235,19 +239,19 @@ public class ItemController {
 		String previewUrl = _item.getPreviewUrl();
 
 		if (pictureUrl != null && pictureUrl.length() > 0) {
-			File pictureFile_ = new File(uploadPath , pictureUrl);
+			File pictureFile_ = new File(uploadPath, pictureUrl);
 			pictureFile_.delete();
 		}
-		
+
 		if (previewUrl != null && previewUrl.length() > 0) {
-			File previewFile_ = new File(uploadPath , previewUrl);
+			File previewFile_ = new File(uploadPath, previewUrl);
 			previewFile_.delete();
 		}
 		// item 상품 테이블에서 삭제처리
 		int count = itemService.remove(item);
-		if(count != 0) {
+		if (count != 0) {
 			rttr.addFlashAttribute("msg", "SUCCESS");
-		}else {
+		} else {
 			rttr.addFlashAttribute("msg", "Fail");
 		}
 		return "redirect:/item/list";
