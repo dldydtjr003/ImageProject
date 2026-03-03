@@ -7,33 +7,25 @@
 	z-index: 1000;
 }
 
-/* 테이블 대신 내부 요소를 정렬하기 위한 설정 */
 .nav-table {
 	margin: 0 auto;
+	border-collapse: collapse;
 	width: 100%;
 	max-width: 1100px;
-	display: flex; /* flex로 변경 */
-	justify-content: center; /* 메뉴를 중앙으로 모음 */
-	list-style: none;
-	padding: 0;
-}
-
-.nav-table tr {
-	display: flex; /* tr도 flex로 작동하게 함 */
-	width: 100%;
-	justify-content: center;
+	/* 핵심 1: 절대적으로 모든 칸의 너비를 동일하게 강제함 */
+	table-layout: fixed !important;
 }
 
 .nav-item {
-	/* 모든 메뉴의 너비를 150px로 고정 (여기서 크기를 조절하세요) */
-	width: 150px;
-	flex-shrink: 0; /* 너비가 줄어들지 않게 고정 */
-	text-align: center;
+	padding: 0;
+	vertical-align: middle;
+	/* 핵심 2: 내용물이 넘쳐도 td 사이즈를 유지함 */
+	overflow: hidden;
 }
 
 .nav-link {
 	display: block;
-	padding: 20px 0;
+	padding: 20px 0; /* 좌우 패딩을 0으로 만들어 공간 확보 */
 	text-decoration: none;
 	color: #4b5563;
 	font-size: 14px;
@@ -41,18 +33,24 @@
 	transition: all 0.2s ease;
 	position: relative;
 	text-align: center;
+	/* 핵심 3: 글자가 너무 길면 다음 줄로 넘어가지 않고 '...' 처리함 */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
+/* 호버 효과 */
 .nav-link:hover {
 	color: #2563eb;
 	background-color: #f8fafc;
 }
 
+/* 하단 파란 줄 */
 .nav-link::after {
 	content: '';
 	position: absolute;
 	bottom: 0;
-	left: 0; /* 왼쪽 끝에서 시작 */
+	left: 0;
 	width: 0;
 	height: 3px;
 	background-color: #2563eb;
@@ -60,10 +58,24 @@
 }
 
 .nav-link:hover::after, .nav-link.active::after {
-	width: 100%; /* 버튼 전체 너비만큼 밑줄 */
+	width: 100%;
 }
 
 .nav-link.active {
 	color: #2563eb;
 	background-color: #eff6ff;
+}
+
+.nav-table {
+	table-layout: fixed !important; /* 무조건 칸 너비를 똑같이 쪼갬 */
+	width: 100% !important;
+}
+
+.nav-item {
+	width: auto !important; /* 브라우저가 임의로 계산하지 못하게 방어 */
+}
+
+.nav-link {
+	width: 100% !important; /* 부모인 td를 꽉 채우게 강제 */
+	box-sizing: border-box !important;
 }
