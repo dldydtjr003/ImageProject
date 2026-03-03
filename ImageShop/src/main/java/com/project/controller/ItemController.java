@@ -184,23 +184,71 @@ public class ItemController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String modify(Item item, RedirectAttributes rttr) throws Exception {
 		MultipartFile pictureFile = item.getPicture();
-
 		if (pictureFile != null && pictureFile.getSize() > 0) {
 			String createdFilename = uploadFile(pictureFile.getOriginalFilename(), pictureFile.getBytes());
+			// 기존의 이지지파일 삭제
+			Item item2 = itemService.read(item);
+			String pictureUrl = item2.getPictureUrl();
+			File pictureFile_ = new File(uploadPath , pictureUrl);
+			pictureFile_.delete();
+
 			item.setPictureUrl(createdFilename);
 		}
 
 		MultipartFile previewFile = item.getPreview();
-
 		if (previewFile != null && previewFile.getSize() > 0) {
 			String createdFilename = uploadFile(previewFile.getOriginalFilename(), previewFile.getBytes());
+			// 기존의 프리뷰 파일 삭제
+			Item item2 = itemService.read(item);
+			String previewUrl = item2.getPreviewUrl();
+			File previewFile_ = new File(uploadPath , previewUrl);
+			previewFile_.delete();
+
 			item.setPreviewUrl(createdFilename);
 		}
 		int count = itemService.modify(item);
+
 		if (count != 0) {
 			rttr.addFlashAttribute("msg", "SUCCESS");
 		} else {
-			rttr.addFlashAttribute("msg", "FAIL");
+			rttr.addFlashAttribute("msg", "Fail");
+		}
+		return "redirect:/item/list";
+	}
+
+	// 상품 삭제화면 페이지요청
+	@GetMapping("/remove")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String removeForm(Item item, Model model) throws Exception {
+		Item _item = itemService.read(item);
+		model.addAttribute(_item);
+		return "item/remove";
+	}
+
+	// 상품 삭제 처리
+	@PostMapping("/remove")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String remove(Item item, RedirectAttributes rttr) throws Exception {
+		// 외장하드에 있는 상품 이미지 제거
+		Item _item = itemService.read(item);
+		String pictureUrl = _item.getPictureUrl();
+		String previewUrl = _item.getPreviewUrl();
+
+		if (pictureUrl != null && pictureUrl.length() > 0) {
+			File pictureFile_ = new File(uploadPath , pictureUrl);
+			pictureFile_.delete();
+		}
+		
+		if (previewUrl != null && previewUrl.length() > 0) {
+			File previewFile_ = new File(uploadPath , previewUrl);
+			previewFile_.delete();
+		}
+		// item 상품 테이블에서 삭제처리
+		int count = itemService.remove(item);
+		if(count != 0) {
+			rttr.addFlashAttribute("msg", "SUCCESS");
+		}else {
+			rttr.addFlashAttribute("msg", "Fail");
 		}
 		return "redirect:/item/list";
 	}

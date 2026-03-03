@@ -1,55 +1,69 @@
-nav-menu-wrapper {
-	background-color: #ffffff;
-	border-bottom: 2px solid #f1f3f5;
-	margin-bottom: 30px;
+/* 메뉴 전체 컨테이너 */
+.nav-menu-wrapper {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04); /* 은은한 그림자 추가 */
+    margin-bottom: 40px;
+    position: sticky; /* 스크롤 시 상단 고정 효과 (필요 시) */
+    top: 0;
+    z-index: 100;
 }
 
+/* 테이블 레이아웃 최적화 */
 .nav-table {
-	margin: 0 auto;
-	border-collapse: collapse;
-	width: 100%;
-	max-width: 700px;
-	table-layout: fixed;
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1000px; /* 메뉴가 많으므로 가로폭을 조금 넓힘 */
+    table-layout: auto; /* 고정폭 대신 글자 길이에 맞춤 */
 }
 
-.nav-table tr {
-	display: table-row !important;
-}
-
+/* 메뉴 아이템 간격 및 정렬 */
 .nav-item {
-	padding: 0;
-	text-align: center;
-	display: table-cell !important;
+    padding: 0;
+    text-align: center;
 }
 
+/* 링크 스타일: 카드 스타일과 통일감 부여 */
 .nav-link {
-	display: block;
-	padding: 20px 0;
-	text-decoration: none;
-	color: #495057;
-	font-size: 16px;
-	font-weight: 500;
-	letter-spacing: -0.5px;
-	transition: all 0.25s ease;
-	position: relative;
+    display: block;
+    padding: 18px 15px;
+    text-decoration: none;
+    color: #4b5563; /* 톤다운된 세련된 그레이 */
+    font-size: 15px;
+    font-weight: 600; /* 조금 더 두껍게 */
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    white-space: nowrap; /* 글자 줄바꿈 방지 */
 }
 
+/* 호버 시 스타일: 파란색 포인트 */
 .nav-link:hover {
-	color: #007aff;
-	background-color: #f8f9fa;
+    color: #2563eb; /* 메인 포인트 컬러 (Blue) */
+    background-color: #f8fafc; /* 아주 연한 푸른빛 배경 */
 }
 
+/* 하단 라인 애니메이션 */
 .nav-link::after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 0;
-	height: 3px;
-	background-color: #007aff;
-	transition: width 0.3s ease;
+    content: '';
+    position: absolute;
+    bottom: -1px; /* 테두리와 겹치게 */
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: #2563eb;
+    transition: all 0.3s ease;
+    transform: translateX(-50%); /* 중앙에서 퍼져나가는 효과 */
 }
 
 .nav-link:hover::after {
-	width: 100%;
+    width: 80%; /* 전체를 꽉 채우지 않고 80%만 채워 세련미 강조 */
+}
+
+/* 활성화된 메뉴 표시 (나중에 현재 페이지 표시용 클래스 추가 시 사용) */
+.nav-link.active {
+    color: #2563eb;
+}
+.nav-link.active::after {
+    width: 80%;
 }

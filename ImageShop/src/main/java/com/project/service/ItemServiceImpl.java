@@ -43,4 +43,10 @@ public class ItemServiceImpl implements ItemService {
 	public int modify(Item item) throws Exception {
 		return mapper.modify(item);
 	}
+
+	@Override
+	public int remove(Item item) throws Exception {
+		return mapper.remove(item);
+	}
+
 }

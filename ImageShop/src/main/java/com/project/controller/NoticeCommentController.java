@@ -14,7 +14,6 @@ import com.project.domain.NoticeComment;
 import com.project.service.NoticeCommentService;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Slf4j
@@ -29,15 +28,15 @@ public class NoticeCommentController {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
 	public String register(NoticeComment comment, RedirectAttributes rttr, Authentication auth) throws Exception {
 
-		if (auth != null) {
-			comment.setUserId(auth.getName());
+		comment.setUserId(auth.getName());
+
+		int count = service.register(comment);
+		if(count != 0) {
+			rttr.addFlashAttribute("msg", "SUCCESS");
+		}else {
+			rttr.addFlashAttribute("msg", "Fail");
 		}
-
-		service.register(comment);
-
-		// 리다이렉트
 		rttr.addAttribute("noticeNo", comment.getBoardNo());
-		rttr.addFlashAttribute("msg", "SUCCESS");
 
 		return "redirect:/notice/read";
 	}

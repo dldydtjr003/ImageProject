@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public class NoticeComment {
 
-	private int commentNo;
-	private int boardNo;
-	private int userNo;
+	private Integer commentNo;
+	private Integer boardNo;
+	private Integer userNo;
 	private String userId;
 	private String content;
 	private Date regDate;

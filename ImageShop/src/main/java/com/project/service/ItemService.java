@@ -18,4 +18,6 @@ public interface ItemService {
 
 	public int modify(Item item) throws Exception;
 
+	public int remove(Item item) throws Exception;
+
 }
