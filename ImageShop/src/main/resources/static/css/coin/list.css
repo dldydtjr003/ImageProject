@@ -1,0 +1,67 @@
+/* 전체 레이아웃 */
+.content-container {
+	max-width: 900px;
+	margin: 60px auto;
+	padding: 0 20px;
+	min-height: 600px;
+}
+
+/* 제목 영역 */
+.list-header h2 {
+	font-size: 26px;
+	font-weight: 700;
+	color: #1a1a1a;
+	margin-bottom: 30px;
+	text-align: left;
+	padding-left: 10px;
+	border-left: 5px solid #007aff; /* 제목 옆에 포인트 바 추가 */
+}
+
+/* 테이블 스타일 */
+table {
+	width: 100%;
+	border-collapse: collapse; /* 테두리 겹침 방지 */
+	background-color: #ffffff;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+	border: none;
+}
+
+/* 테이블 헤더 */
+th {
+	background-color: #f1f5f9;
+	color: #475569;
+	font-weight: 600;
+	padding: 16px;
+	font-size: 14px;
+	border-bottom: 2px solid #e2e8f0;
+}
+
+/* 테이블 데이터 셀 */
+td {
+	padding: 16px;
+	font-size: 15px;
+	color: #334155;
+	border-bottom: 1px solid #f1f5f9;
+	text-align: center; /* 기본 중앙 정렬 */
+}
+
+/* 금액(Amount) 열만 왼쪽 정렬 및 강조 */
+td:nth-child(2) {
+	text-align: left;
+	font-weight: 600;
+	color: #007aff;
+}
+
+/* 마우스 올렸을 때 행 강조 */
+tr:hover {
+	background-color: #f8fafc;
+}
+
+/* 리스트가 비었을 때 */
+td[colspan="3"] {
+	padding: 100px 0;
+	color: #94a3b8;
+	font-size: 16px;
+}
