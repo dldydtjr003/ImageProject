@@ -49,25 +49,30 @@ public class MemberController {
 	@PostMapping("/register")
 	public String register(@Validated Member member, BindingResult result, Model model, RedirectAttributes rttr)
 			throws Exception {
+
+		// 1. 입력값 검증(Validation) 에러 처리
 		if (result.hasErrors()) {
-			// 직업코드 목록을 조회하여 뷰에 전달
 			String groupCode = "A00";
 			List<CodeLabelValue> jobList = codeService.getCodeList(groupCode);
-
 			model.addAttribute("jobList", jobList);
-
 			return "user/register";
 		}
-		// 비밀번호 암호화
+
+		// 2. 비밀번호 암호화
 		String inputPassword = member.getUserPw();
 		member.setUserPw(passwordEncoder.encode(inputPassword));
 
-		int count = service.register(member);
+		try {
+			service.register(member);
 
-		if (count != 0) {
+			// 성공!
 			rttr.addFlashAttribute("userName", member.getUserName());
 			return "redirect:/user/registerSuccess";
-		} else {
+
+		} catch (Exception e) {
+			// 중복 아이디
+			log.error("회원가입 실패 원인: {}", e.getMessage());
+
 			rttr.addFlashAttribute("userName", member.getUserName());
 			return "redirect:/user/registerFailed";
 		}
