@@ -19,42 +19,37 @@
 	<div class="register-wrapper">
 		<div class="register-card">
 			<h2>
-				<spring:message code="item.header.read" />
+				<spring:message code="useritem.header.read" />
 			</h2>
 
-			<form:form modelAttribute="item" action="/item/buy" method="post">
-				<form:hidden path="itemId" />
+			<form:form modelAttribute="userItem">
+				<form:hidden path="userItemNo" />
+
 				<table>
 					<tr>
-						<td><spring:message code="item.itemName" /></td>
-						<td><form:input path="itemName" readonly="true"/></td>
+						<td><spring:message code="useritem.itemName" /></td>
+						<td><form:input path="itemName" readonly="true" /></td>
 						<td><font color="red"><form:errors path="itemName" /></font></td>
 					</tr>
 					<tr>
-						<td><spring:message code="item.itemPrice" /></td>
-						<td><form:input path="price" readonly="true"/>&nbsp;원</td>
+						<td><spring:message code="useritem.itemPrice" /></td>
+						<td><form:input path="price" readonly="true" /></td>
 						<td><font color="red"><form:errors path="price" /></font></td>
 					</tr>
 					<tr>
-						<td><spring:message code="item.picture" /></td>
-						<td><img src="/item/picture?itemId=${item.itemId}" width="210"></td>
+						<td><spring:message code="useritem.itemFile" /></td>
+						<td><img src="/item/display?itemId=${userItem.itemId}" width="210"></td>
 					</tr>
 					<tr>
-						<td><spring:message code="item.preview" /></td>
-						<td><img src="/item/display?itemId=${item.itemId}" width="210"></td>
-					</tr>
-					<tr>
-						<td><spring:message code="item.itemDescription" /></td>
-						<td><form:textarea path="description"  readonly="true"/></td>
-						<td><form:errors path="description" /></td>
+						<td><spring:message code="useritem.itemDescription" /></td>
+						<td><form:textarea path="description" readonly="true" /></td>
+						<td><font color="red"><form:errors path="description" /></font></td>
 					</tr>
 				</table>
+
 			</form:form>
 
-			<div class="btn-container">
-				<button type="submit" id="btnBuy">
-					<spring:message code="action.buy" />
-				</button>
+			<div>
 				<button type="submit" id="btnList">
 					<spring:message code="action.list" />
 				</button>
@@ -66,12 +61,9 @@
 
 	<script>
 		$(document).ready(function() {
-			let formObj = $("#item");
-			$("#btnBuy").on("click", function() {
-				formObj.submit();
-			});
+			let formObj = $("#userItem");
 			$("#btnList").on("click", function() {
-				self.location = "/item/list";
+				self.location = "/userItem/list";
 			});
 		});
 	</script>

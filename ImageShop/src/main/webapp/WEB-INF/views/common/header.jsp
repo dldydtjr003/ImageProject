@@ -4,7 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<link rel="stylesheet" href="<spring:url value='/css/common/header.css'/>">
+<link rel="stylesheet"
+	href="<spring:url value='/css/common/header.css'/>">
 
 <div class="user-header-wrapper">
 	<a href="/" class="header-logo">
@@ -24,6 +25,8 @@
 		</sec:authorize>
 
 		<sec:authorize access="isAuthenticated()">
+			<span class="user-coin"> (잔여 코인: <sec:authentication property="principal.member.coin" />)
+			</span>
 			<div class="user-profile-capsule">
 				<div class="user-name">
 					<sec:authentication property="principal.username" />

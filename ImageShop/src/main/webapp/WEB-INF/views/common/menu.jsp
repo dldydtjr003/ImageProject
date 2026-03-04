@@ -57,10 +57,13 @@
 					<td class="nav-item"><a href="/item/list" class="nav-link"><spring:message
 								code="menu.item.member" /></a></td>
 					<!-- 코인 충전과 충전 내역을 메뉴에 추가한다. -->
-					<td  class="nav-item"><a href="/coin/charge" class="nav-link"><spring:message
+					<td class="nav-item"><a href="/coin/charge" class="nav-link"><spring:message
 								code="menu.coin.charge" /></a></td>
-					<td  class="nav-item"><a href="/coin/list" class="nav-link"><spring:message
+					<td class="nav-item"><a href="/coin/list" class="nav-link"><spring:message
 								code="menu.coin.list" /></a></td>
+					<!-- 구매 상품과 구매 내역을 메뉴에 추가한다. -->
+					<td class="nav-item"><a href="/userItem/list" class="nav-link"><spring:message code="menu.useritem.list" /></a></td>
+					<td class="nav-item"><a href="/coin/listPay" class="nav-link"><spring:message code="menu.coin.listPay" /></a></td>
 				</sec:authorize>
 			</sec:authorize>
 

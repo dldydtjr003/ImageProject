@@ -96,4 +96,9 @@
 		SELECT count(*)
 		FROM member
 	</select>
+	
+	<!-- 회원 코인 조회 -->
+	<select id="getCoin" resultType="int">
+		Select coin FROM member where user_no = #{userNo}
+	</select>
 </mapper>

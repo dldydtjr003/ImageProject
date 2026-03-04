@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.domain.ChargeCoin;
+import com.project.domain.Member;
+import com.project.domain.PayCoin;
 import com.project.mapper.ChargeCoinMapper;
 
 @Service
@@ -27,6 +29,23 @@ public class ChargeCoinServiceImpl implements ChargeCoinService {
 	@Override
 	public List<ChargeCoin> list(int userNo) throws Exception {
 		return mapper.list(userNo);
+	}
+
+	@Override
+	@Transactional
+	public int pay(PayCoin payCoin) throws Exception {
+		return mapper.pay(payCoin);
+	}
+
+	@Override
+	@Transactional
+	public int createPayHistory(PayCoin payCoin) throws Exception {
+		return mapper.createPayHistory(payCoin);
+	}
+
+	@Override
+	public List<PayCoin> listPayHistory(Member member) throws Exception {
+		return mapper.listPayHistory(member);
 	}
 
 }

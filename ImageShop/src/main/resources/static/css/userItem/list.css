@@ -1,0 +1,100 @@
+/* 전체 레이아웃 */
+.content-container {
+	max-width: 1000px; /* 테이블 폭에 맞춰 약간 넓힘 */
+	margin: 60px auto;
+	padding: 0 20px;
+	min-height: 600px;
+}
+
+/* 제목 영역 */
+.list-header h2 {
+	font-size: 26px;
+	font-weight: 700;
+	color: #1a1a1a;
+	margin-bottom: 30px;
+	text-align: left;
+	padding-left: 15px;
+	border-left: 5px solid #007aff;
+}
+
+/* 테이블 스타일 */
+.item-list-table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #ffffff;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* 테이블 헤더 */
+.item-list-table th {
+	background-color: #f1f5f9;
+	color: #475569;
+	font-weight: 600;
+	padding: 16px;
+	font-size: 14px;
+	border-bottom: 2px solid #e2e8f0;
+}
+
+/* 테이블 데이터 셀 */
+.item-list-table td {
+	padding: 16px;
+	font-size: 15px;
+	color: #334155;
+	border-bottom: 1px solid #f1f5f9;
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* 상품명 열 (두 번째 열) 강조 */
+.item-name-cell {
+	text-align: center !important; /* 상품명은 보통 왼쪽 정렬이 보기 좋습니다 */
+	font-weight: 600;
+}
+
+.item-name-cell a {
+	color: #1a1a1a;
+	text-decoration: none;
+	transition: color 0.2s;
+	
+}
+
+.item-name-cell a:hover {
+	color: #007aff;
+}
+
+/* 가격 열 강조 */
+.price-cell {
+	color: #007aff;
+	font-weight: 700;
+}
+
+/* 다운로드 버튼 스타일 */
+.btn-download {
+	display: inline-block;
+	padding: 6px 12px;
+	background-color: #007aff;
+	color: #fff !important;
+	text-decoration: none;
+	border-radius: 6px;
+	font-size: 12px;
+	font-weight: 600;
+	transition: background 0.2s;
+}
+
+.btn-download:hover {
+	background-color: #0056b3;
+}
+
+/* 마우스 올렸을 때 행 강조 */
+.item-list-table tr:hover {
+	background-color: #f8fafc;
+}
+
+/* 리스트가 비었을 때 */
+.empty-msg {
+	padding: 100px 0 !important;
+	color: #94a3b8;
+	font-size: 16px;
+}
