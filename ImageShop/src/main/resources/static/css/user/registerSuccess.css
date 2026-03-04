@@ -1,78 +1,95 @@
-body {
-	background-color: #f5f7fa;
-	font-family: 'Pretendard', sans-serif;
-	margin: 0;
-	color: #333;
-}
-
-.success-wrapper {
+/* 전체 배경 및 레이아웃 */
+.error-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	min-height: 80vh;
-	padding: 40px 20px;
+	padding: 20px;
+	background-color: #fcfcfc;
 }
 
-.success-card {
+/* 에러 카드 */
+.error-card {
 	background: #ffffff;
-	width: 100%;
 	max-width: 450px;
+	width: 100%;
 	padding: 60px 40px;
 	border-radius: 24px;
-	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 	text-align: center;
+	border: 1px solid #f0f0f0;
 }
 
-.icon-box {
+/* 아이콘 박스 */
+.error-icon-box {
 	width: 80px;
 	height: 80px;
-	background-color: #e0f2fe;
+	background-color: #fff5f5; /* 아주 연한 레드 */
 	border-radius: 50%;
+	margin: 0 auto 25px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0 auto 30px;
 }
 
-.icon-box svg {
-	width: 40px;
-	height: 40px;
-	color: #007aff;
+.icon-exclamation {
+	font-size: 40px;
+	font-weight: 800;
+	color: #ff4d4f; /* 에러 레드 */
 }
 
-h2 {
+/* 텍스트 스타일 */
+.error-title {
 	font-size: 24px;
 	font-weight: 700;
-	color: #1a1a1a;
-	margin-bottom: 16px;
-	line-height: 1.4;
+	color: #262626;
+	margin-bottom: 15px;
 }
 
-p {
+.error-text {
 	font-size: 15px;
-	color: #64748b;
+	color: #8c8c8c;
+	line-height: 1.6;
 	margin-bottom: 40px;
 }
 
-.login-btn {
+/* 버튼 레이아웃 */
+.error-actions {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+/* 이전 페이지 버튼 (주요 행동) */
+.btn-back {
 	display: block;
-	height: 52px;
-	line-height: 52px;
-	background-color: #007aff;
-	color: white;
+	padding: 15px;
+	background-color: #262626;
+	color: #ffffff !important;
 	text-decoration: none;
-	border-radius: 14px;
-	font-size: 16px;
 	font-weight: 600;
-	transition: all 0.2s;
+	border-radius: 12px;
+	transition: all 0.2s ease;
 }
 
-.login-btn:hover {
-	background-color: #0063d1;
-	transform: translateY(-1px);
-	box-shadow: 0 4px 12px rgba(0, 122, 255, 0.2);
+.btn-back:hover {
+	background-color: #000000;
+	transform: translateY(-2px);
 }
 
-.login-btn:active {
-	transform: scale(0.98);
+/* 홈으로 버튼 (보조 행동) */
+.btn-home {
+	display: block;
+	padding: 15px;
+	background-color: #f5f5f5;
+	color: #595959 !important;
+	text-decoration: none;
+	font-weight: 600;
+	border-radius: 12px;
+	transition: all 0.2s ease;
+}
+
+.btn-home:hover {
+	background-color: #e8e8e8;
+	color: #262626 !important;
 }

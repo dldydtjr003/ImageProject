@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.common.security.domain.CustomUser;
 import com.project.domain.Member;
 import com.project.domain.UserItem;
+import com.project.exception.NotMyItemException;
 import com.project.service.UserItemService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -61,6 +62,12 @@ public class UserItemController {
 	public ResponseEntity<byte[]> download(UserItem userItem, Authentication authentication) throws Exception {
 		UserItem _userItem = service.read(userItem);
 
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		Member member = customUser.getMember();
+		if (member.getUserNo() != userItem.getUserNo()) {
+			throw new NotMyItemException("이것은 나의 구매 상품이 아니다.");
+		}
+
 		String fullName = _userItem.getPictureUrl();
 
 		InputStream in = null;
@@ -74,8 +81,8 @@ public class UserItemController {
 			String fileName = fullName.substring(fullName.indexOf("_") + 1);
 
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-			headers.add("Content-Disposition", "attachment;	filename=\"" 
-							+ new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			headers.add("Content-Disposition",
+					"attachment;	filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
 
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -88,4 +95,9 @@ public class UserItemController {
 		return entity;
 	}
 
+	// 본인 상품 예외 처리
+	@GetMapping("/notMyItem")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
+	public void notMyItem(Model model) throws Exception {
+	}
 }

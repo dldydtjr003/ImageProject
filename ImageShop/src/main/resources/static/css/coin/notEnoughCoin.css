@@ -1,0 +1,84 @@
+/* 전체 배경 및 중앙 정렬 */
+body {
+    background-color: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    margin: 0;
+    font-family: 'Pretendard', -apple-system, sans-serif;
+}
+
+/* 카드 컨테이너 */
+.result-container {
+    background: #ffffff;
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+/* 아이콘 스타일 (이미지나 FontAwesome 대용) */
+.status-icon {
+    font-size: 50px;
+    color: #f39c12; /* 경고를 상징하는 오렌지색 */
+    margin-bottom: 20px;
+}
+
+/* 제목 */
+.result-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+}
+
+/* 메시지 텍스트 */
+.result-msg {
+    font-size: 16px;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
+
+/* 버튼 그룹 */
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 충전 버튼 (Primary) */
+.btn-primary {
+    display: block;
+    background-color: #007aff;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* 이전으로 버튼 (Secondary) */
+.btn-secondary {
+    display: block;
+    background-color: #f1f5f9;
+    color: #475569;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: #e2e8f0;
+}

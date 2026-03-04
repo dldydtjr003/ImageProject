@@ -77,7 +77,7 @@ public class ChargeCoinController {
 	public void listPayHistory(Model model, Authentication authentication) throws Exception {
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		Member member = customUser.getMember();
-		
+
 		model.addAttribute("list", service.listPayHistory(member));
 	}
 
@@ -87,5 +87,10 @@ public class ChargeCoinController {
 		return "coin/success";
 	}
 
+	// 코인 부족 예외 처리
+	@GetMapping("/notEnoughCoin")
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
+	public void notEnoughCoin(Model model) throws Exception {
 
+	}
 }
