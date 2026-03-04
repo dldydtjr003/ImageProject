@@ -32,7 +32,7 @@
 					</tr>
 					<tr>
 						<td><spring:message code="item.itemPrice" /></td>
-						<td><form:input path="price" readonly="true"/>&nbsp;원</td>
+						<td><form:input path="price" readonly="true" />&nbsp;</td>
 						<td><font color="red"><form:errors path="price" /></font></td>
 					</tr>
 					<tr>

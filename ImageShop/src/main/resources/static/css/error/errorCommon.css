@@ -1,0 +1,95 @@
+/* 전체 배경 및 중앙 정렬 */
+body {
+	background-color: #f8fafc;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh; /* 화면 높이 전체 사용 */
+	margin: 0;
+	font-family: 'Pretendard', -apple-system, sans-serif;
+}
+
+/* 카드 컨테이너 */
+.result-container {
+	background: #ffffff;
+	padding: 60px 40px;
+	border-radius: 24px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+	text-align: center;
+	max-width: 420px;
+	width: 90%;
+	border: 1px solid #f0f0f0;
+}
+
+/* 아이콘 스타일 (원형 배경 추가) */
+.status-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 80px;
+	height: 80px;
+	background-color: #fff5f5; /* 연한 레드/오렌지 배경 */
+	color: #f39c12; /* 경고 아이콘 색상 */
+	font-size: 40px;
+	font-weight: bold;
+	border-radius: 50%;
+	margin: 0 auto 25px;
+}
+
+/* 제목 */
+.result-title {
+	font-size: 24px;
+	font-weight: 700;
+	color: #1a1a1a;
+	margin-bottom: 15px;
+	/* h2 태그의 기본 여백 제거 */
+	margin-top: 0;
+}
+
+/* 메시지 텍스트 */
+.result-msg {
+	font-size: 16px;
+	color: #64748b;
+	line-height: 1.6;
+	margin-bottom: 35px;
+}
+
+/* 버튼 그룹 */
+.btn-group {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+/* 메인 버튼 (Primary) */
+.btn-primary {
+	display: block;
+	background-color: #007aff;
+	color: #ffffff !important; /* 링크 기본색 덮어쓰기 */
+	text-decoration: none;
+	padding: 15px;
+	border-radius: 12px;
+	font-weight: 600;
+	transition: background 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+	background-color: #0056b3;
+	transform: translateY(-2px);
+}
+
+/* 보조 버튼 (Secondary) */
+.btn-secondary {
+	display: block;
+	background-color: #f1f5f9;
+	color: #475569 !important;
+	text-decoration: none;
+	padding: 15px;
+	border-radius: 12px;
+	font-weight: 600;
+	transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+	background-color: #e2e8f0;
+}
