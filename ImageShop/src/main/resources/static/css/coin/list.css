@@ -52,6 +52,7 @@ td:nth-child(2) {
 	text-align: left;
 	font-weight: 600;
 	color: #007aff;
+	text-align: center;
 }
 
 /* 마우스 올렸을 때 행 강조 */

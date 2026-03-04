@@ -10,4 +10,6 @@ public interface ChargeCoinMapper {
 
 	public List<ChargeCoin> list(int userNo) throws Exception;
 
+	public int create(ChargeCoin chargeCoin) throws Exception;
+
 }

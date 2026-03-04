@@ -61,22 +61,22 @@ public class ChargeCoinController {
 
 		return "redirect:/coin/success";
 	}
-
-	// 코인 충전 성공 페이지
-	@GetMapping("/success")
-	public String success() throws Exception {
-		return "coin/success";
-	}
-
+	
 	// 충전 내역 페이지
 	@GetMapping("/list")
 	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	public void list(Model model, Authentication authentication) throws Exception {
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		Member member = customUser.getMember();
-
+		
 		int userNo = member.getUserNo();
 		model.addAttribute("list", service.list(userNo));
+	}
+
+	// 코인 충전 성공 페이지
+	@GetMapping("/success")
+	public String success() throws Exception {
+		return "coin/success";
 	}
 
 }

@@ -18,7 +18,10 @@ public class ChargeCoinServiceImpl implements ChargeCoinService {
 	@Override
 	@Transactional
 	public int charge(ChargeCoin chargeCoin) throws Exception {
-		return mapper.charge(chargeCoin);
+		// 1. 해당되는 멤버회원에게 코인충전 진행
+		mapper.charge(chargeCoin);
+		// 2. 코인 충전 내역서 생성
+		return mapper.create(chargeCoin);
 	}
 
 	@Override
