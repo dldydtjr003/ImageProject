@@ -55,16 +55,14 @@ public class NoticeController {
 
 	@GetMapping("/read")
 	public String read(Notice notice, Model model) throws Exception {
-		// 💡 notice.getNoticeNo() 값이 제대로 들어있는지 확인!
-		Notice dbNotice = service.read(notice);
+		Notice notice_ = service.read(notice);
 
-		if (dbNotice == null) {
-			log.error("공지사항을 찾을 수 없습니다. 번호: " + notice.getNoticeNo());
+		if (notice_ == null) {
 			return "redirect:/notice/list";
 		}
 		model.addAttribute("commentList", commentService.list(notice.getNoticeNo()));
 
-		model.addAttribute("notice", dbNotice);
+		model.addAttribute("notice", notice_);
 		return "notice/read";
 	}
 

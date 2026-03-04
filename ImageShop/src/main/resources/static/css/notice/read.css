@@ -1,3 +1,4 @@
+/* 전체 레이아웃 및 배경 */
 body {
 	background-color: #f5f7fa;
 	font-family: 'Pretendard', sans-serif;
@@ -5,44 +6,40 @@ body {
 	color: #333;
 }
 
-/* Layout */
 .page-container {
 	display: flex;
 	justify-content: center;
-	align-items: flex-start;
-	min-height: 80vh;
 	padding: 40px 20px;
-	box-sizing: border-box;
 }
 
 .content-wrapper {
 	width: 100%;
-	max-width: 700px;
+	max-width: 800px; /* 게시글은 등록보다 조금 더 넓게 설정 */
 }
 
-/* Card Style */
+/* 카드 공통 스타일 (등록 카드 스타일 계승) */
 .card {
 	background: #ffffff;
 	padding: 40px;
 	border-radius: 24px;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-	margin-bottom: 20px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+	margin-bottom: 25px;
 }
 
-/* Header */
 .card-header {
-	font-size: 24px;
+	font-size: 22px;
 	font-weight: 700;
 	color: #1a1a1a;
 	margin-bottom: 30px;
-	text-align: center;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #f1f5f9;
 }
 
-/* Table Style */
+/* 게시글 테이블 스타일 */
 table {
 	width: 100%;
 	border-collapse: separate;
-	border-spacing: 0 15px;
+	border-spacing: 0 10px;
 }
 
 td:first-child {
@@ -50,44 +47,48 @@ td:first-child {
 	font-size: 14px;
 	font-weight: 600;
 	color: #64748b;
-	vertical-align: middle;
+	vertical-align: top;
+	padding-top: 13px;
 }
 
-input[type="text"], textarea {
+/* 읽기 전용 입력창 스타일 */
+input[readonly], textarea[readonly] {
 	width: 100%;
-	padding: 12px 15px;
-	border: 1px solid #e2e8f0;
-	border-radius: 12px;
-	font-size: 15px;
-	background-color: #f8fafc;
-	color: #334155;
-	box-sizing: border-box;
+	padding: 13px 0; /* 테두리 빼고 텍스트만 깔끔하게 보이기 */
+	border: none;
+	font-size: 16px;
+	background-color: transparent;
+	color: #1e293b;
+	outline: none;
+	cursor: default;
 }
 
-textarea {
+textarea[readonly] {
 	min-height: 200px;
+	line-height: 1.8;
 	resize: none;
-	font-family: 'Pretendard', sans-serif;
 }
 
-/* Button Group */
+/* 버튼 컨테이너 (등록 버튼 그룹 스타일 계승) */
 .btn-group {
 	display: flex;
+	justify-content: flex-end;
 	gap: 10px;
 	margin-top: 30px;
 }
 
 button {
-	flex: 1;
-	height: 50px;
+	padding: 0 24px;
+	height: 48px;
 	border-radius: 12px;
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: 600;
 	cursor: pointer;
 	transition: all 0.2s;
 	border: none;
 }
 
+/* 버튼 색상 정의 */
 #btnEdit {
 	background-color: #007aff;
 	color: white;
@@ -95,6 +96,7 @@ button {
 
 #btnEdit:hover {
 	background-color: #0063d1;
+	transform: translateY(-1px);
 }
 
 #btnRemove {
@@ -104,6 +106,7 @@ button {
 
 #btnRemove:hover {
 	background-color: #ffe4e6;
+	transform: translateY(-1px);
 }
 
 #btnList {
@@ -115,39 +118,12 @@ button {
 	background-color: #e2e8f0;
 }
 
-/* Comment Section */
-.comment-section-title {
+/* --- 댓글 영역 (Comment Section) --- */
+.comment-card-title {
 	font-size: 18px;
-	font-weight: 600;
-	color: #1a1a1a;
-	margin-bottom: 15px;
-}
-
-.comment-input-area {
-	margin-top: 20px;
-}
-
-#content {
-	min-height: 100px;
-	margin-bottom: 10px;
-}
-
-#btnRegister {
-	background-color: #10b981;
-	color: white;
-	width: 100px;
-	height: 45px;
-	float: right;
-}
-
-#btnRegister:hover {
-	background-color: #059669;
-}
-
-/* Comment List */
-.comment-list {
-	margin-top: 20px;
-	border-top: 1px solid #e2e8f0;
+	font-weight: 700;
+	color: #334155;
+	margin-bottom: 20px;
 }
 
 .comment-item {
@@ -155,22 +131,164 @@ button {
 	border-bottom: 1px solid #f1f5f9;
 }
 
-.comment-info {
+.comment-item:last-child {
+	border-bottom: none;
+}
+
+.comment-header-flex {
 	display: flex;
 	justify-content: space-between;
-	font-size: 13px;
+	align-items: center;
+	margin-bottom: 12px;
+}
+
+.comment-user-info strong {
+	font-size: 15px;
+	color: #1e293b;
+}
+
+.comment-user-info span {
+	font-size: 12px;
 	color: #94a3b8;
-	margin-bottom: 8px;
+	margin-left: 10px;
 }
 
-.comment-user {
-	font-weight: 600;
-	color: #334155;
+.comment-actions {
+	display: flex;
+	gap: 8px;
 }
 
-.comment-content {
-	font-size: 14px;
-	color: #475569;
+/* 댓글 내 작은 버튼들 */
+.comment-actions button, .btn-edit-cancel {
+	height: 32px;
+	padding: 0 12px;
+	border-radius: 8px;
+	font-size: 12px;
+	background-color: #f8fafc;
+	color: #64748b;
+	border: 1px solid #e2e8f0;
+}
+
+.comment-body {
+	font-size: 15px;
 	line-height: 1.6;
+	color: #475569;
 	white-space: pre-wrap;
+}
+
+/* 댓글 수정 폼 스타일 (숨김 상태 보완) */
+[id^="edit_area_"] {
+	display: none;
+	margin-top: 10px;
+	background: #f8fafc;
+	padding: 15px;
+	border-radius: 12px;
+}
+
+[id^="edit_area_"] textarea {
+	min-height: 80px;
+	background: white;
+	border: 1px solid #e2e8f0;
+	margin-bottom: 10px;
+}
+
+/* 댓글 작성 영역 (Register input 스타일 계승) */
+.comment-write-card textarea {
+	min-height: 100px;
+	margin-bottom: 15px;
+}
+
+.comment-submit-box {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.comment-submit-box button {
+	background-color: #007aff;
+	color: white;
+}
+/* 댓글 작성 카드 전체 스타일 */
+.comment-write-card {
+	background: #ffffff;
+	padding: 35px;
+	border-radius: 24px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* 댓글 작성 내부 레이아웃 */
+.comment-write-row {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+/* 작성자 표시 칸 (아이디 보이기) */
+.comment-writer-box {
+	display: flex;
+	align-items: center;
+}
+
+.comment-writer-box input {
+	width: fit-content;
+	padding: 8px 16px;
+	background-color: #f1f5f9; /* 연한 그레이 배경 */
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 700;
+	color: #475569;
+	text-align: center;
+}
+
+/* 댓글 입력 텍스트박스 (Register textarea 스타일 계승) */
+.comment-input-box textarea {
+	width: 100%;
+	min-height: 120px;
+	padding: 16px;
+	border: 1px solid #e2e8f0;
+	border-radius: 16px;
+	font-size: 15px;
+	line-height: 1.6;
+	background-color: #f8fafc;
+	color: #334155;
+	box-sizing: border-box;
+	font-family: 'Pretendard', sans-serif;
+	resize: none;
+	outline: none;
+	transition: all 0.2s ease-in-out;
+}
+
+/* 포커스 시 블루 포인트 효과 */
+.comment-input-box textarea:focus {
+	border-color: #007aff;
+	background-color: #ffffff;
+	box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+}
+
+/* 등록 버튼 박스 */
+.comment-submit-box {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.comment-submit-box button {
+	width: 120px;
+	height: 48px;
+	background-color: #007aff; /* 메인 블루 색상 */
+	color: white;
+	font-size: 15px;
+	font-weight: 600;
+	border-radius: 12px;
+	border: none;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.comment-submit-box button:hover {
+	background-color: #0063d1;
+	transform: translateY(-1px);
+}
+
+.comment-submit-box button:active {
+	transform: scale(0.98);
 }
